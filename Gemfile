@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'simple_command'
 gem 'jwt'
 gem 'responders'
+gem 'react-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
