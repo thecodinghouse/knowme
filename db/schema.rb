@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20180129095848) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "auth_token"
+    t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
   end
 
   add_foreign_key "educational_details", "users"

@@ -8,11 +8,9 @@ class Profile extends React.Component{
 
     render() { 
         return (
-            <div class="row">
-                <tr>
-                    <td><h2>Welcome {this.state.user.email}</h2></td>
-                    <EducationalDetail props = {this.}/>
-                </tr>
+            <div className="row">
+                <h2>Welcome {this.state.user.email}</h2>
+
             </div>
         )
     }

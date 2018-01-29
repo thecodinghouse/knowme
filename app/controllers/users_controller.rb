@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
+    skip_before_action :require_login, only: ['index', 'new']
 
     def index
-    end    
+        render component: 'Login'
+    end
 
     def update
+
     end
 
     def show
@@ -12,19 +15,7 @@ class UsersController < ApplicationController
         render component: 'Profile', props:{user: @user, e_detail:@e_detail}
     end
 
-    def create
-        @user = User.create!(user_params)
-        UserDetail.create!(user: @user)
-        redirect_to @user
-    end
-
     def new
         render component: 'SignUp'
-    end
-
-    private
-
-    def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'login', to: 'authentication#login'
       post 'signup', to: 'authentication#signup'
+      get 'logout', to: 'authentication#logout'
       resources :educational_details, :only =>['create', 'update', 'index']
     end
   end
