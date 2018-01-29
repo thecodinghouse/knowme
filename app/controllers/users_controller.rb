@@ -7,8 +7,9 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find(params[:id])
-        render component: 'Profile', props:{user: user}
+        @user = User.find(params[:id])
+        @e_detail = @user.educational_details
+        render component: 'Profile', props:{user: @user, e_detail:@e_detail}
     end
 
     def create

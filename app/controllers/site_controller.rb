@@ -1,8 +1,7 @@
-class SiteController < ApplicationController 
+class SiteController < ApplicationController
     layout "application"
 
-    def index 
+    def index
         render component: 'Main'
-    end 
+    end
 end
-    

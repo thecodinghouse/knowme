@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125064838) do
+ActiveRecord::Schema.define(version: 20180129095848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "educational_details", force: :cascade do |t|
+    t.date     "year_of_start"
+    t.date     "year_of_end"
+    t.string   "degree"
+    t.string   "field_of_study"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_educational_details_on_user_id", using: :btree
+  end
 
   create_table "user_details", force: :cascade do |t|
     t.string   "name"
@@ -31,4 +42,5 @@ ActiveRecord::Schema.define(version: 20180125064838) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "educational_details", "users"
 end

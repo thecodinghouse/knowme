@@ -10,7 +10,8 @@ class Profile extends React.Component{
         return (
             <div class="row">
                 <tr>
-                    <td><h2>Welcome {this.state.user.email}</h2></td>       
+                    <td><h2>Welcome {this.state.user.email}</h2></td>
+                    <EducationalDetail props = {this.}/>
                 </tr>
             </div>
         )
