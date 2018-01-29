@@ -11,8 +11,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        @e_detail = @user.educational_details
-        render component: 'Profile', props:{user: @user, e_detail:@e_detail}
+        render component: 'Profile', props:{user: @user}
     end
 
     def new

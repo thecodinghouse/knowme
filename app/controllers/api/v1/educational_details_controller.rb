@@ -1,8 +1,8 @@
-class EducationalDetailsController < BaseController
+class Api::V1::EducationalDetailsController < Api::V1::BaseController
 
   def index
-    respond_with EducationalDetail.all
-    render component: 'EducationalDetail'
+    @user = User.find(params[:id])
+    respond_with @user.educational_details
   end
 
   def update
