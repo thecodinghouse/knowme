@@ -1,5 +1,6 @@
 class Api::V1::BaseController < ApplicationController 
     respond_to :json 
+    skip_before_action :require_login 
     before_action :authenticate_request 
     attr_reader :current_user 
 
