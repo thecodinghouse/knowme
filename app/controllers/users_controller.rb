@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     end
 
     def create
-        byebug
         @user = User.create!(user_params)
         UserDetail.create!(user: @user)
         redirect_to @user
