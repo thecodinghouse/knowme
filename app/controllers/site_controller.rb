@@ -1,7 +1,8 @@
 class SiteController < ApplicationController 
-    skip_before_action :authenticate_request
+    layout "application"
 
     def index 
+        render component: 'Main'
     end 
 end
     

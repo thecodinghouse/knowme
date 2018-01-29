@@ -1,15 +1,30 @@
 class UsersController < ApplicationController
 
     def index
-        respond_with User.all
     end    
-    
-    def create
-    end
 
     def update
     end
 
     def show
+        user = User.find(params[:id])
+        render component: 'Profile', props:{user: user}
+    end
+
+    def create
+        byebug
+        @user = User.create!(user_params)
+        UserDetail.create!(user: @user)
+        redirect_to @user
+    end
+
+    def new
+        render component: 'SignUp'
+    end
+
+    private
+
+    def user_params
+        params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end
