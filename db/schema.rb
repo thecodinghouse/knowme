@@ -52,6 +52,19 @@ ActiveRecord::Schema.define(version: 20180130093122) do
     t.index ["user_id"], name: "index_skills_and_users_on_user_id", using: :btree
   end
 
+  create_table "social_accounts", force: :cascade do |t|
+    t.string   "username"
+    t.string   "avatar_url"
+    t.string   "email"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "oauth_token"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_social_accounts_on_user_id", using: :btree
+  end
+
   create_table "user_details", force: :cascade do |t|
     t.string   "name"
     t.date     "dob"
@@ -72,4 +85,5 @@ ActiveRecord::Schema.define(version: 20180130093122) do
 
   add_foreign_key "educational_details", "users"
   add_foreign_key "experience_details", "users"
+  add_foreign_key "social_accounts", "users"
 end
