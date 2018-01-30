@@ -57,6 +57,7 @@ class Login extends React.Component{
                         </div>
                         
                         <button onClick={this.handleLogin.bind(this)} className="btn btn-primary btn-block">Log In</button>
+                        <a href="/auth/github" className="btn btn-dark btn-block" >Sign In with Github</a>
                     </div>
                 </div>
             </div> 
