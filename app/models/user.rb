@@ -4,6 +4,10 @@ class User < ApplicationRecord
     has_one :user_detail
     validates :email, presence: true, uniqueness: true
     has_many :social_accounts
+    has_many :educational_details
+    has_many :experience_details
+    has_and_belongs_to_many :skills
+
 
     def self.from_omniauth(auth)
         SocialAccount.where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |account|
