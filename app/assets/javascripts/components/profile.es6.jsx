@@ -11,6 +11,7 @@ class Profile extends React.Component{
             <div>
                 <EducationalDetail user_id={this.state.user.id}/>
                 <ExperienceDetail user_id={this.state.user.id}/>
+                <Skill user_id={this.state.user.id}/>
             </div>
         )
     }
