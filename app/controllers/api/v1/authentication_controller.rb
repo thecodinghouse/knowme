@@ -4,7 +4,7 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
     def login 
         command = AuthenticateUser.call(params[:email], params[:password]) 
         if command.success? 
-            session[:auth_token] = command.result.auth_token
+            session[:user_id] = command.result.id
             render json: { auth_token: command.result.auth_token, detail_page: user_path(command.result.id) } 
         else 
             render json: { errors: command.errors }, status: :unauthorized 
@@ -15,7 +15,7 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
         @user = User.new(user_params)
         if @user.save
             UserDetail.create!(user: @user)
-            session[:auth_token] = @user.auth_token
+            session[:user_id] = @user.id
             render json: { auth_token: @user.auth_token, detail_page: user_path(@user.id)} 
         else
             render json: { errors: @user.errors.messages }, status: :bad_request
@@ -23,9 +23,9 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
     end
     
     def logout
-        user = User.find_by_auth_token(params['auth_token'])
+        user = User.find(params['id'])
         user.regenerate_auth_token if user
-        session.delete('auth_token')
+        reset_session
         if request.xhr?
             render json: { success: true }
         else

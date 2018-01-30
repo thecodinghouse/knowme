@@ -5,9 +5,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'login', to: 'authentication#login'
       post 'signup', to: 'authentication#signup'
-      get 'logout', to: 'authentication#logout'
+      delete 'logout', to: 'authentication#logout'
     end
   end
+
+  get "/auth/:provider/callback", to: "sessions#create"
+  get 'auth/failure', to: redirect('/')
 
   resources :users
 end
