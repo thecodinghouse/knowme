@@ -20,6 +20,6 @@ class Api::V1::EducationalDetailsController < Api::V1::BaseController
   private
 
   def details_params
-    params.require(:educational_detail).permit(:year_of_start)
+    params.require(:educational_detail).permit(:year_of_start, :year_of_end, :degree, :field_of_study)
   end
 end

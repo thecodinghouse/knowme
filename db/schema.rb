@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129095848) do
+ActiveRecord::Schema.define(version: 20180130093122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,32 @@ ActiveRecord::Schema.define(version: 20180129095848) do
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_educational_details_on_user_id", using: :btree
+  end
+
+  create_table "experience_details", force: :cascade do |t|
+    t.string   "company_name"
+    t.date     "year_of_start"
+    t.date     "year_of_end"
+    t.string   "designation"
+    t.string   "location"
+    t.boolean  "currently_working"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_experience_details_on_user_id", using: :btree
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "skill_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "skills_and_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "skill_id"
+    t.index ["skill_id"], name: "index_skills_and_users_on_skill_id", using: :btree
+    t.index ["user_id"], name: "index_skills_and_users_on_user_id", using: :btree
   end
 
   create_table "user_details", force: :cascade do |t|
@@ -45,4 +71,5 @@ ActiveRecord::Schema.define(version: 20180129095848) do
   end
 
   add_foreign_key "educational_details", "users"
+  add_foreign_key "experience_details", "users"
 end

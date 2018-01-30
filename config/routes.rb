@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post 'signup', to: 'authentication#signup'
       get 'logout', to: 'authentication#logout'
       resources :educational_details, :only =>['create', 'update', 'index']
+      resources :experience_details, :only =>['create', 'update', 'index']
     end
   end
 

@@ -8,8 +8,9 @@ class Profile extends React.Component{
 
     render() { 
         return (
-            <div className="row">
+            <div>
                 <EducationalDetail user_id={this.state.user.id}/>
+                <ExperienceDetail user_id={this.state.user.id}/>
             </div>
         )
     }
