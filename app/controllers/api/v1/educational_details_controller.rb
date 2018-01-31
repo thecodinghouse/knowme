@@ -2,13 +2,13 @@ class Api::V1::EducationalDetailsController < Api::V1::BaseController
 
   def index
     @user = User.find(params[:id])
-    respond_with @user.educational_details
+    render json: @user.educational_details
   end
 
-  def update
-    ed = EducationalDetail.find(params[id])
-    ed.update(details_params)
-    respond_with ed
+  def bulk_update
+    h = Hash[ *params["educational_details"].values.collect { |v| [ v["id"], v.except("id") ] }.flatten ]
+    EducationalDetail.update(h.keys, h.values)
+    render json: { success: true }
   end
 
   def create

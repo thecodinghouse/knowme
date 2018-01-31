@@ -6,6 +6,7 @@ class EducationalDetail extends React.Component {
             educational_details: [],
             user_id: props.user_id
         };
+        this.typingTimer;
     };
 
     componentDidMount() {
@@ -29,12 +30,31 @@ class EducationalDetail extends React.Component {
         let educational_details = this.state.educational_details;
         educational_details[i][key] = e.target.value;
         this.setState({educational_details: educational_details});
-        this.handleSave();
+        this.handleSave(educational_details);
     }
 
-    handleSave() {
+    handleSave(data) {
+        if (this.typingTimer) {
+            clearTimeout(this.typingTimer);
+        }
+        this.typingTimer = setTimeout(() => {
+            this.doneTyping(data)
+        }, 5000);
+    }
 
-        console.log(this.state.educational_details);
+    doneTyping(data){  
+        console.log(data) 
+        $.ajax({
+            method: 'PATCH',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            data: {educational_details: data},
+            url: '/api/v1/education_update',
+            success: function (result) {
+                console.log(result);
+            }
+        });
     }
 
     render() {
