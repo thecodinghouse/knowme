@@ -4,8 +4,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
-    volumes:
-      - .:/knowme
     depends_on:
       - db
   db:
