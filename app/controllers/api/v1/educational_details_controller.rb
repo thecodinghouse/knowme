@@ -1,4 +1,5 @@
 class Api::V1::EducationalDetailsController < Api::V1::BaseController
+  skip_before_action :authenticate_request, only: ['index']
 
   def index
     @user = User.find(params[:id])
@@ -11,10 +12,23 @@ class Api::V1::EducationalDetailsController < Api::V1::BaseController
     render json: { success: true }
   end
 
+  def update
+    @ed = EducationalDetail.find(params[:id])
+    if @ed.update(details_params)
+      render json: @ed
+    else
+      render json: { errors: @ed.errors.messages }, status: :bad_request
+    end
+  end
+
   def create
-    ed = EducationalDetail.new(details_params)
-    ed.save()
-    respond_with ed
+    @ed = EducationalDetail.new(details_params)
+    @ed.user = current_user
+    if @ed.save
+      render json: @ed
+    else
+      render json: { errors: @ed.errors.messages }, status: :bad_request
+    end
   end
 
   private

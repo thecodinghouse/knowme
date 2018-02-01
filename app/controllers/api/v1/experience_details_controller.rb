@@ -1,5 +1,6 @@
 class Api::V1::ExperienceDetailsController < Api::V1::BaseController
-
+    skip_before_action :authenticate_request, only: ['index']
+    
     def index
       @user = User.find(params[:id])
       render json: @user.experience_details
@@ -11,10 +12,23 @@ class Api::V1::ExperienceDetailsController < Api::V1::BaseController
       render json: { success: true }
     end
 
+    def update
+      @ed = ExperienceDetail.find(params[:id])
+      if @ed.update(details_params)
+        render json: @ed
+      else
+        render json: { errors: @ed.errors.messages }, status: :bad_request
+      end
+    end
+
     def create
-      ed = ExperienceDetail.new(details_params)
-      ed.save()
-      respond_with ed
+      @ed = ExperienceDetail.new(details_params)
+      @ed.user = current_user
+      if @ed.save
+        render json: @ed
+      else
+        render json: { errors: @ed.errors.messages }, status: :bad_request
+      end
     end
 
     private

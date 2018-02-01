@@ -38,7 +38,11 @@
     </nav>
     <div class="container mt-3">
         <% flash.each do |key, value| %>
-           <div class="alert alert-<%= key %>"><%= value %></div>
+          <% if key == 'auth_token' %>
+            <script type="text/javascript">localStorage.setItem("auth_token", "<%=value%>");</script>
+          <% else %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
         <% end %>
         <%= yield %>
     </div>

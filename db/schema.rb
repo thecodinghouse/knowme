@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(version: 20180131074005) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "skills_and_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "skill_id"
+    t.index ["skill_id"], name: "index_skills_and_users_on_skill_id", using: :btree
+    t.index ["user_id"], name: "index_skills_and_users_on_user_id", using: :btree
+  end
+
   create_table "skills_users", id: false, force: :cascade do |t|
     t.integer "user_id",  null: false
     t.integer "skill_id", null: false

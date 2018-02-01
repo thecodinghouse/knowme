@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
     if account.user.valid?
       session[:user_id] = account.user.id
       flash[:info] = "Your password is your (username of #{account.provider}) for now." if showMsg.blank?
-      redirect_to root_path
+      flash[:auth_token] = "#{account.user.auth_token}"
+      flash.keep(:auth_token)
+      redirect_to user_path(account.user)
     end
   end
 end

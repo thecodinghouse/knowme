@@ -7,7 +7,7 @@ class User < ApplicationRecord
     has_many :educational_details
     has_many :experience_details
     has_many :achievements
-    has_and_belongs_to_many :skills
+    has_and_belongs_to_many :skills, through: :skills_users
     has_many :projects
 
 
