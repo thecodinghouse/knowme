@@ -1,8 +1,0 @@
-FROM ruby:2.3.1
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-RUN mkdir /knowme
-WORKDIR /knowme
-COPY Gemfile /knowme/Gemfile
-COPY Gemfile.lock /knowme/Gemfile.lock
-RUN bundle install
-COPY . /knowme
