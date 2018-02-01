@@ -6,7 +6,9 @@ class User < ApplicationRecord
     has_many :social_accounts
     has_many :educational_details
     has_many :experience_details
+    has_many :achievements
     has_and_belongs_to_many :skills
+    has_many :projects
 
 
     def self.from_omniauth(auth)

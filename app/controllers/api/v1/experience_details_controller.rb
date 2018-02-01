@@ -2,13 +2,13 @@ class Api::V1::ExperienceDetailsController < Api::V1::BaseController
 
     def index
       @user = User.find(params[:id])
-      respond_with @user.experience_details
+      render json: @user.experience_details
     end
 
-    def update
-      ed = ExperienceDetail.find(params[id])
-      ed.update(details_params)
-      respond_with ed
+    def bulk_update
+      h = Hash[ *params["experience_details"].values.collect { |v| [ v["id"], v.except("id") ] }.flatten ]
+      ExperienceDetail.update(h.keys, h.values)
+      render json: { success: true }
     end
 
     def create

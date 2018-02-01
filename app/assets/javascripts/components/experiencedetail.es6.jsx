@@ -6,6 +6,7 @@ class ExperienceDetail extends React.Component {
             experience_details: [],
             user_id: props.user_id
         };
+        this.typingTimer;
     };
 
     componentDidMount() {
@@ -29,12 +30,31 @@ class ExperienceDetail extends React.Component {
         let experience_details = this.state.experience_details;
         experience_details[i][key] = e.target.value;
         this.setState({experience_details: experience_details});
-        this.handleSave();
+        this.handleSave(experience_details);
     }
 
-    handleSave() {
+    handleSave(data) {
+        if (this.typingTimer) {
+            clearTimeout(this.typingTimer);
+        }
+        this.typingTimer = setTimeout(() => {
+            this.doneTyping(data)
+        }, 5000);
+    }
 
-        console.log(this.state.experience_details);
+    doneTyping(data){
+        console.log(data)
+        $.ajax({
+            method: 'PATCH',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            data: {experience_details: data},
+            url: '/api/v1/experience_update',
+            success: function (result) {
+                console.log(result);
+            }
+        });
     }
 
     render() {

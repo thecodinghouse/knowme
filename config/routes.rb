@@ -9,6 +9,14 @@ Rails.application.routes.draw do
       resources :educational_details, :only =>['create', 'index']
       resources :experience_details, :only =>['create', 'index']
       patch 'education_update', to: 'educational_details#bulk_update'
+      patch 'experience_update', to: 'experience_details#bulk_update'
+      resources :skills, :only =>['create', 'update', 'index']
+      resources :achievements, :only =>['create', 'update', 'index']
+      patch 'achievement_update', to: 'achievements#bulk_update'
+      resources :projects, :only =>['create', 'update', 'index']
+      patch 'project_update', to: 'projects#bulk_update'
+
+
     end
   end
 
