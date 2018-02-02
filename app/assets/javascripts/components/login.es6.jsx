@@ -6,6 +6,34 @@ class Login extends React.Component{
         this.state = {user:{ email: '', password: ''}, errors:{}};
     };
 
+    componentDidMount() {
+        console.log(window.SE);
+        let SE = window.SE;
+        SE.init({
+            clientId: 11729,
+            key: ')dMdcfU51TfrwZpqaicSHw((',
+            channelUrl: 'http://knowme.tixdo.com/',
+            complete: function (data) { 
+                $('#stackLogin').removeAttr('disabled');
+                $('#stackLogin').click(function() {
+                    SE.authenticate({
+                        success: function(data) { 
+                            alert(
+                                'User Authorized with account id = ' + 
+                                data.networkUsers[0].account_id + ', got access token = ' + 
+                                data.accessToken
+                            ); 
+                        },
+                        error: function(data) { 
+                            alert('An error occurred:\n' + data.errorName + '\n' + data.errorMessage); 
+                        },
+                        networkUsers: true
+                    });
+                })
+            }
+        });
+    }
+
     handleLogin() {
         var that = this;
         $.ajax({
@@ -21,7 +49,7 @@ class Login extends React.Component{
           }
         });
     }
-
+    
     handleEmailChange(e) {
         var user = this.state.user;
         user.email = e.target.value;
@@ -35,6 +63,7 @@ class Login extends React.Component{
     }
 
     render() { 
+        // this.handleStackInit();
         let alert = null;
         if (Object.keys(this.state.errors).length === 0){
             alert = '';
@@ -58,6 +87,7 @@ class Login extends React.Component{
                         
                         <button onClick={this.handleLogin.bind(this)} className="btn btn-primary btn-block">Log In</button>
                         <a href="/auth/github" className="btn btn-dark btn-block" >Sign In with Github</a>
+                        <button disabled id="stackLogin" className="btn btn-warning btn-block">Sign In with StackExchange</button>
                     </div>
                 </div>
             </div> 
