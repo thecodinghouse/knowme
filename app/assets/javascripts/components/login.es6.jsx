@@ -9,29 +9,37 @@ class Login extends React.Component{
     componentDidMount() {
         console.log(window.SE);
         let SE = window.SE;
-        SE.init({
-            clientId: 11729,
-            key: ')dMdcfU51TfrwZpqaicSHw((',
-            channelUrl: 'http://knowme.tixdo.com/',
-            complete: function (data) { 
-                $('#stackLogin').removeAttr('disabled');
-                $('#stackLogin').click(function() {
-                    SE.authenticate({
-                        success: function(data) { 
-                            alert(
-                                'User Authorized with account id = ' + 
-                                data.networkUsers[0].account_id + ', got access token = ' + 
-                                data.accessToken
-                            ); 
-                        },
-                        error: function(data) { 
-                            alert('An error occurred:\n' + data.errorName + '\n' + data.errorMessage); 
-                        },
-                        networkUsers: true
-                    });
-                })
-            }
-        });
+        // SE.init({
+        //     clientId: 11729,
+        //     key: ')dMdcfU51TfrwZpqaicSHw((',
+        //     channelUrl: 'http://knowme.tixdo.com/',
+        //     complete: function (data) { 
+        //         $('#stackLogin').removeAttr('disabled');
+        //         $('#stackLogin').click(function() {
+        //             SE.authenticate({
+        //                 success: function(data) { 
+        //                     console.log("Authenticate", data);
+        //                     $.ajax({
+        //                         method: 'POST',
+        //                         data: that.state.user,
+        //                         url: '/api/v1/login',
+        //                         success: function(res) {
+        //                           localStorage.setItem("auth_token", res.auth_token)
+        //                           window.location.href =  res.detail_page
+        //                         },
+        //                         error: function(res) {  
+        //                           that.setState({errors: res.responseJSON.errors})
+        //                         }
+        //                     }); 
+        //                 },
+        //                 error: function(data) { 
+        //                     console.log("Authentication error:", data);
+        //                 },
+        //                 networkUsers: true
+        //             });
+        //         })
+        //     }
+        // });
     }
 
     handleLogin() {
@@ -87,6 +95,7 @@ class Login extends React.Component{
                         
                         <button onClick={this.handleLogin.bind(this)} className="btn btn-primary btn-block">Log In</button>
                         <a href="/auth/github" className="btn btn-dark btn-block" >Sign In with Github</a>
+                        <a href="/auth/facebook" className="btn btn-danger btn-block" >Sign In with Facebook</a>
                         <button disabled id="stackLogin" className="btn btn-warning btn-block">Sign In with StackExchange</button>
                     </div>
                 </div>

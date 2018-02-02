@@ -25,7 +25,8 @@ ActiveRecord::Schema.define(version: 20180131074005) do
     t.index ["user_id"], name: "index_achievements_on_user_id", using: :btree
   end
 
-  create_table "educational_details", force: :cascade do |t|
+  create_table "educations", force: :cascade do |t|
+    t.string   "institution"
     t.date     "year_of_start"
     t.date     "year_of_end"
     t.string   "degree"
@@ -33,20 +34,17 @@ ActiveRecord::Schema.define(version: 20180131074005) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_educational_details_on_user_id", using: :btree
+    t.index ["user_id"], name: "index_educations_on_user_id", using: :btree
   end
 
-  create_table "experience_details", force: :cascade do |t|
-    t.string   "company_name"
-    t.date     "year_of_start"
-    t.date     "year_of_end"
-    t.string   "designation"
-    t.string   "location"
-    t.boolean  "currently_working"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name"
+    t.date     "birthday"
+    t.string   "image_url"
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_experience_details_on_user_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id", unique: true, using: :btree
   end
 
   create_table "projects", force: :cascade do |t|
@@ -61,16 +59,9 @@ ActiveRecord::Schema.define(version: 20180131074005) do
   end
 
   create_table "skills", force: :cascade do |t|
-    t.string   "skill_name"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "skills_and_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "skill_id"
-    t.index ["skill_id"], name: "index_skills_and_users_on_skill_id", using: :btree
-    t.index ["user_id"], name: "index_skills_and_users_on_user_id", using: :btree
   end
 
   create_table "skills_users", id: false, force: :cascade do |t|
@@ -91,27 +82,32 @@ ActiveRecord::Schema.define(version: 20180131074005) do
     t.index ["user_id"], name: "index_social_accounts_on_user_id", using: :btree
   end
 
-  create_table "user_details", force: :cascade do |t|
-    t.string   "name"
-    t.date     "dob"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_details_on_user_id", unique: true, using: :btree
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
+    t.boolean  "admin"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "auth_token"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
   end
 
+  create_table "works", force: :cascade do |t|
+    t.string   "company_name"
+    t.date     "year_of_start"
+    t.date     "year_of_end"
+    t.string   "designation"
+    t.string   "location"
+    t.boolean  "currently_working"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_works_on_user_id", using: :btree
+  end
+
   add_foreign_key "achievements", "users"
-  add_foreign_key "educational_details", "users"
-  add_foreign_key "experience_details", "users"
+  add_foreign_key "educations", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "social_accounts", "users"
+  add_foreign_key "works", "users"
 end

@@ -7,7 +7,7 @@ class Api::V1::SkillsController < Api::V1::BaseController
   end
   
   def create
-    @s = Skill.find_by_skill_name(details_params["skill_name"])
+    @s = Skill.find_by_name(details_params["name"])
     if @s.blank?
       @s = Skill.new(details_params)
       @s.save()
@@ -25,7 +25,7 @@ class Api::V1::SkillsController < Api::V1::BaseController
   private
 
   def details_params
-    params.require(:skill).permit(:skill_name)
+    params.require(:skill).permit(:name)
   end
 
 end

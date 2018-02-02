@@ -50,7 +50,7 @@ class Achievement extends React.Component {
                 "Authorization": localStorage.getItem('auth_token'),
             },
             data: {achievements: data},
-            url: '/api/v1/achievement_update',
+            url: '/api/v1/achievements_update',
             success: function (result) {
                 console.log(result);
             }

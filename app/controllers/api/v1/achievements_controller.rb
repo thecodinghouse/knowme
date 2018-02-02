@@ -8,12 +8,12 @@ class Api::V1::AchievementsController < Api::V1::BaseController
 
   def bulk_update
     h = Hash[*params["achievements"].values.collect {|v| [v["id"], v.except("id")]}.flatten]
-    Achievement.update(h.keys, h.values)
+    current_user.achievements.update(h.keys, h.values)
     render json: {success: true}
   end
 
   def update
-    @a = Achievement.find(params[:id])
+    @a = current_user.achievements.find(params[:id])
     if @a.update(details_params)
       render json: @a
     else
@@ -22,8 +22,7 @@ class Api::V1::AchievementsController < Api::V1::BaseController
   end
 
   def create
-    @a = Achievement.new(details_params)
-    @a.user = current_user
+    @a = current_user.achievements.new(details_params)
     if @a.save
       render json: @a
     else

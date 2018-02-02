@@ -35,6 +35,12 @@ gem 'omniauth-github'
 gem "active_model_serializers", require: true
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
+gem 'omniauth-facebook'
+gem "koala"
+
+gem 'omniauth-stackexchange'
+gem 'ruby-stackoverflow'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

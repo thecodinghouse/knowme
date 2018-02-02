@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user = User.create!(email: 'admin@knowme.com' , password: 'admin123' , password_confirmation: 'admin123')
-UserDetail.create!(name: 'admin', dob: Date.new(1990, 12, 8), user: user)
+Profile.create!(name: 'admin', birthday: Date.new(1990, 12, 8), user: user)
 

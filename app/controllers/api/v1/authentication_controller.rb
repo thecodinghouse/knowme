@@ -14,7 +14,7 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
     def signup
         @user = User.new(user_params)
         if @user.save
-            UserDetail.create!(user: @user)
+            Profile.create!(user: @user)
             session[:user_id] = @user.id
             render json: { auth_token: @user.auth_token, detail_page: user_path(@user.id), user_id: @user.id} 
         else

@@ -50,7 +50,7 @@ class Project extends React.Component {
                 "Authorization": localStorage.getItem('auth_token'),
             },
             data: {projects: data},
-            url: '/api/v1/project_update',
+            url: '/api/v1/projects_update',
             success: function (result) {
                 console.log(result);
             }

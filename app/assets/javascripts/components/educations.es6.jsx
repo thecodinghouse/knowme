@@ -1,11 +1,11 @@
-class EducationalDetail extends React.Component {
+class Education extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            educational_details: [],
+            educations: [],
             user_id: props.user_id,
-            educational_detail: {}
+            education: {}
         };
         this.typingTimer;
     };
@@ -17,19 +17,19 @@ class EducationalDetail extends React.Component {
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            url: '/api/v1/educational_details/?id=' + this.state.user_id,
+            url: '/api/v1/educations/?id=' + this.state.user_id,
             success: function (result) {
                 that.setState({
-                    educational_details: result,
+                    educations: result,
                 });
             }
         });
     };
 
     handleChangeInput(i, key, e) {
-        let educational_details = this.state.educational_details;
+        let educational_details = this.state.educations;
         educational_details[i][key] = e.target.value;
-        this.setState({educational_details: educational_details});
+        this.setState({educations: educational_details});
         this.handleSave(educational_details);
     }
 
@@ -48,8 +48,8 @@ class EducationalDetail extends React.Component {
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            data: {educational_details: data},
-            url: '/api/v1/education_update',
+            data: {educations: data},
+            url: '/api/v1/educations_update',
             success: function (result) {
                 console.log(result);
             }
@@ -57,9 +57,9 @@ class EducationalDetail extends React.Component {
     }
 
     handleCreateFormInput(key, e) {
-        let educational_detail = this.state.educational_detail;
+        let educational_detail = this.state.education;
         educational_detail[key] = e.target.value;
-        this.setState({educational_detail: educational_detail});
+        this.setState({education: educational_detail});
     }
 
     handleAddEducation(){ 
@@ -69,14 +69,14 @@ class EducationalDetail extends React.Component {
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            data: {educational_detail: that.state.educational_detail},
-            url: '/api/v1/educational_details',
+            data: {education: that.state.education},
+            url: '/api/v1/educations',
             success: function (result) {
                 console.log(result);
-                let educational_details =  that.state.educational_details
+                let educational_details =  that.state.educations
                 educational_details.push(result)
                 that.setState({
-                    educational_details: educational_details,
+                    educations: educational_details,
                 })
                 $('#educationModal').modal('hide');
             }
@@ -93,9 +93,19 @@ class EducationalDetail extends React.Component {
                         <button type="button" className="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#educationModal" >+ Add Education</button>
                     </div>
                     <div className="card-body">
-                        {this.state.educational_details.map((item,i) => (
+                        {this.state.educations.map((item,i) => (
                             <div className="mt-2" key={i}>
+                                    <div className="form-row">
+                                        <div className="col form-group">
+                                            <label>Institution</label>
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                value={item.institution}
+                                                onChange={(evt)=>this.handleChangeInput(i, "institution", evt)}/>
 
+                                        </div>
+                                    </div>
                                     <div className="form-row">
                                         <div className="col form-group">
                                             <label>Degree</label>
@@ -149,7 +159,16 @@ class EducationalDetail extends React.Component {
                         </div>
                         <div className="modal-body">
                             <div className="mt-2">
+                            <div className="form-row">
+                                        <div className="col form-group">
+                                            <label>Institution</label>
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                onChange={(evt)=>this.handleCreateFormInput( "institution", evt)}/>
 
+                                        </div>
+                                    </div>
                                 <div className="form-row">
                                     <div className="col form-group">
                                         <label>Degree</label>

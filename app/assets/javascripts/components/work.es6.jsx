@@ -1,11 +1,11 @@
-class ExperienceDetail extends React.Component {
+class Work extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            experience_details: [],
+            works: [],
             user_id: props.user_id,
-            experience_detail:{}
+            work:{}
         };
         this.typingTimer;
     };
@@ -17,19 +17,19 @@ class ExperienceDetail extends React.Component {
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            url: '/api/v1/experience_details/?id=' + this.state.user_id,
+            url: '/api/v1/works/?id=' + this.state.user_id,
             success: function (result) {
                 that.setState({
-                    experience_details: result,
+                    works: result,
                 });
             }
         });
     };
 
     handleChangeInput(i, key, e) {
-        let experience_details = this.state.experience_details;
+        let experience_details = this.state.works;
         experience_details[i][key] = e.target.value;
-        this.setState({experience_details: experience_details});
+        this.setState({works: experience_details});
         this.handleSave(experience_details);
     }
 
@@ -43,14 +43,13 @@ class ExperienceDetail extends React.Component {
     }
 
     doneTyping(data){
-        console.log(data)
         $.ajax({
             method: 'PATCH',
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            data: {experience_details: data},
-            url: '/api/v1/experience_update',
+            data: {works: data},
+            url: '/api/v1/works_update',
             success: function (result) {
                 console.log(result);
             }
@@ -58,9 +57,9 @@ class ExperienceDetail extends React.Component {
     }
 
     handleCreateFormInput(key, e) {
-        let experience_detail = this.state.experience_detail;
+        let experience_detail = this.state.work;
         experience_detail[key] = e.target.value;
-        this.setState({experience_detail: experience_detail});
+        this.setState({work: experience_detail});
     }
 
     handleAddExperience(){ 
@@ -70,14 +69,14 @@ class ExperienceDetail extends React.Component {
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            data: {experience_detail: that.state.experience_detail},
-            url: '/api/v1/experience_details',
+            data: {work: that.state.work},
+            url: '/api/v1/works',
             success: function (result) {
                 console.log(result);
-                let experience_details =  that.state.experience_details
+                let experience_details =  that.state.works
                 experience_details.push(result)
                 that.setState({
-                    experience_details: experience_details,
+                    works: experience_details,
                 })
                 $('#experienceModal').modal('hide');
             }
@@ -93,7 +92,7 @@ class ExperienceDetail extends React.Component {
                     <button type="button" className="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#experienceModal" >+ Add Experience</button>
                 </div>
                 <div className="card-body">
-                    {this.state.experience_details.map((item, i) => (
+                    {this.state.works.map((item, i) => (
                         <div className="mt-2" key={i}>
 
                             <div className="form-row">

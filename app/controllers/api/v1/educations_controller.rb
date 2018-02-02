@@ -1,19 +1,19 @@
-class Api::V1::EducationalDetailsController < Api::V1::BaseController
+class Api::V1::EducationsController < Api::V1::BaseController
   skip_before_action :authenticate_request, only: ['index']
 
   def index
     @user = User.find(params[:id])
-    render json: @user.educational_details
+    render json: @user.educations
   end
 
   def bulk_update
-    h = Hash[ *params["educational_details"].values.collect { |v| [ v["id"], v.except("id") ] }.flatten ]
-    EducationalDetail.update(h.keys, h.values)
+    h = Hash[ *params["educations"].values.collect { |v| [ v["id"], v.except("id") ] }.flatten ]
+    current_user.educations.update(h.keys, h.values)
     render json: { success: true }
   end
 
   def update
-    @ed = EducationalDetail.find(params[:id])
+    @ed = current_user.educations.find(params[:id])
     if @ed.update(details_params)
       render json: @ed
     else
@@ -22,8 +22,7 @@ class Api::V1::EducationalDetailsController < Api::V1::BaseController
   end
 
   def create
-    @ed = EducationalDetail.new(details_params)
-    @ed.user = current_user
+    @ed = current_user.educations.new(details_params)
     if @ed.save
       render json: @ed
     else
@@ -34,6 +33,6 @@ class Api::V1::EducationalDetailsController < Api::V1::BaseController
   private
 
   def details_params
-    params.require(:educational_detail).permit(:year_of_start, :year_of_end, :degree, :field_of_study)
+    params.require(:education).permit(:institution, :year_of_start, :year_of_end, :degree, :field_of_study)
   end
 end

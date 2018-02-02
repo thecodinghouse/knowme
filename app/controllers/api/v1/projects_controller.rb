@@ -8,12 +8,12 @@ class Api::V1::ProjectsController < Api::V1::BaseController
 
     def bulk_update
       h = Hash[*params["projects"].values.collect {|v| [v["id"], v.except("id")]}.flatten]
-      Project.update(h.keys, h.values)
+      current_user.projects.update(h.keys, h.values)
       render json: {success: true}
     end
 
     def update
-      @p = Project.find(params[:id])
+      @p = current_user.projects.find(params[:id])
       if @p.update(details_params)
         render json: @p
       else
@@ -22,8 +22,7 @@ class Api::V1::ProjectsController < Api::V1::BaseController
     end
 
     def create
-      @p = Project.new(details_params)
-      @p.user = current_user
+      @p = current_user.projects.new(details_params)
       if @p.save
         render json: @p
       else

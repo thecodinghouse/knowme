@@ -71,7 +71,7 @@ class Skill extends React.Component {
                                         className="form-control"
                                         type="text"
                                         disabled="true"
-                                        value={item.skill_name}
+                                        value={item.name}
                                         />
                             </div>
                             </div>
@@ -98,7 +98,7 @@ class Skill extends React.Component {
                                         <input
                                             className="form-control"
                                             type="text"
-                                            onChange={(evt)=>this.handleCreateFormInput("skill_name", evt)}/>
+                                            onChange={(evt)=>this.handleCreateFormInput("name", evt)}/>
                                     </div>
                                 </div>
                             </div>
