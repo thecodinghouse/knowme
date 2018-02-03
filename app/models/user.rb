@@ -23,18 +23,43 @@ class User < ApplicationRecord
             user = User.find_by_email(auth.info.email)
             if user.blank?
                 user = User.create!(email: auth.info.email , password: auth.info.name , password_confirmation: auth.info.name)
-                UserDetail.create!(name: auth.info.name , user: user)
+                Profile.create!(name: auth.info.name , user: user, image_url: auth.info.image)
             end
             account.user = user
             account.save!
         end
-        # if auth.provider == 'facebook'
-        #     facebook = Koala::Facebook::API.new(auth.credentials.token)
-        #     profile = facebook.get_object("me?fields=name,id,education,work,location,birthday,hometown")
-        #     client = Client.where(client_params.slice(:email, :phone)).first_or_create
-        #     client.update(client_params)    
-        #     account.user.educational_details.where()
-        # end
+        if auth.provider == 'facebook'
+            facebook = Koala::Facebook::API.new(auth.credentials.token)
+            profile = facebook.get_object("me?fields=education,work,location,birthday,hometown")
+            
+            profile["education"] && profile["education"].each do |e|
+                unless e["school"].blank?
+                    account.user.educations.where('lower(institution) = ?', e["school"]["name"].downcase).first_or_initialize.tap do |edu|
+                        edu.institution = e["school"]["name"]
+                        edu.field_of_study =  e["concentration"][0]["name"] unless e["concentration"].blank?
+                        edu.save!
+                        #ed.update(type: e["type"]) unless e["type"].blank?
+                    end
+                end
+            end
 
+            profile["work"] && profile["work"].each do |w|
+                unless w["employer"].blank?
+                    account.user.works.where('lower(company_name) = ?', w["employer"]["name"]).first_or_initialize.tap do |wrk|
+                        wrk.company_name = w["employer"]["name"]
+                        wrk.location =  w["location"]["name"] unless w["location"].blank?
+                        wrk.designation = w["position"]["name"] unless w["position"].blank?
+                        wrk.year_of_start = w["start_date"] unless w["start_date"].blank?
+                        wrk.year_of_end = w["end_date"] unless w["end_date"].blank?
+                        wrk.save!
+                    end
+                end    
+            end
+
+            account.user.profile.update(birthday: profile["birthday"]) unless profile["birthday"].blank?
+            #account.user.profile.update(hometown: profile["hometown"]) unless profile["hometown"].blank?
+        end
+        
+        return account
     end
 end
