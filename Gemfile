@@ -32,6 +32,7 @@ gem 'react-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'omniauth-github'
+gem "github_api"
 gem "active_model_serializers", require: true
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 

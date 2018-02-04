@@ -96,7 +96,8 @@ class Login extends React.Component{
                         <button onClick={this.handleLogin.bind(this)} className="btn btn-primary btn-block">Log In</button>
                         <a href="/auth/github" className="btn btn-dark btn-block" >Sign In with Github</a>
                         <a href="/auth/facebook" className="btn btn-danger btn-block" >Sign In with Facebook</a>
-                        <button disabled id="stackLogin" className="btn btn-warning btn-block">Sign In with StackExchange</button>
+                        <a href="/auth/stackexchange" className="btn btn-warning btn-block" >Sign In with StackExchange</a>
+                        {/* <button disabled id="stackLogin" className="btn btn-warning btn-block">Sign In with StackExchange</button> */}
                     </div>
                 </div>
             </div> 

@@ -71,12 +71,20 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crass (1.0.3)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     erubis (2.7.0)
     execjs (2.7.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     ffi (1.9.18-x86-mingw32)
+    github_api (0.18.2)
+      addressable (~> 2.4)
+      descendants_tracker (~> 0.0.4)
+      faraday (~> 0.8)
+      hashie (~> 3.5, >= 3.5.2)
+      oauth2 (~> 1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.5.7)
@@ -239,6 +247,7 @@ DEPENDENCIES
   bcrypt!
   byebug
   coffee-rails (~> 4.2)
+  github_api
   jbuilder (~> 2.5)
   jquery-rails
   koala

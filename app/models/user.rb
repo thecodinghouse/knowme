@@ -45,12 +45,16 @@ class User < ApplicationRecord
 
             profile["work"] && profile["work"].each do |w|
                 unless w["employer"].blank?
-                    account.user.works.where('lower(company_name) = ?', w["employer"]["name"]).first_or_initialize.tap do |wrk|
+                    account.user.works.where('lower(company_name) = ?', w["employer"]["name"].downcase).first_or_initialize.tap do |wrk|
                         wrk.company_name = w["employer"]["name"]
                         wrk.location =  w["location"]["name"] unless w["location"].blank?
                         wrk.designation = w["position"]["name"] unless w["position"].blank?
                         wrk.year_of_start = w["start_date"] unless w["start_date"].blank?
-                        wrk.year_of_end = w["end_date"] unless w["end_date"].blank?
+                        if w["end_date"].blank?
+                            wrk.currently_working = true
+                        else
+                            wrk.year_of_end = w["end_date"] 
+                        end
                         wrk.save!
                     end
                 end    
@@ -59,7 +63,10 @@ class User < ApplicationRecord
             account.user.profile.update(birthday: profile["birthday"]) unless profile["birthday"].blank?
             #account.user.profile.update(hometown: profile["hometown"]) unless profile["hometown"].blank?
         end
-        
+        if auth.provider == 'stackexchange'
+            # RubyStackoverflow.users_tags([], options={})
+        end
+
         return account
     end
 end
