@@ -46,12 +46,12 @@ ActiveRecord::Schema.define(version: 20180205073512) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "current_location"
-    t.string   "hobby"
-    t.string   "languages_known"
+    t.string   "hobbies"
+    t.string   "languages"
     t.string   "hometown"
     t.string   "marital_status"
     t.string   "about_me"
-    t.integer  "contact_no"
+    t.string   "contact_no"
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true, using: :btree
   end
 
