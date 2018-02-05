@@ -6,14 +6,14 @@ Rails.application.routes.draw do
       post 'login', to: 'authentication#login'
       post 'signup', to: 'authentication#signup'
       delete 'logout', to: 'authentication#logout'
-      resources :educations, :only =>['create', 'index', 'update', 'delete']
-      resources :works, :only =>['create', 'index', 'update', 'delete']
+      resources :educations, :only =>['create', 'index', 'update', 'destroy']
+      resources :works, :only =>['create', 'index', 'update', 'destroy']
       patch 'educations_update', to: 'educations#bulk_update'
       patch 'works_update', to: 'works#bulk_update'
       resources :skills, :only =>['create', 'index', 'delete']
-      resources :achievements, :only =>['create', 'update', 'index', 'delete']
+      resources :achievements, :only =>['create', 'update', 'index', 'destroy']
       patch 'achievements_update', to: 'achievements#bulk_update'
-      resources :projects, :only =>['create', 'update', 'index', 'delete']
+      resources :projects, :only =>['create', 'update', 'index', 'destroy']
       patch 'projects_update', to: 'projects#bulk_update'
     end
   end

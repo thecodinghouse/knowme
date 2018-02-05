@@ -83,6 +83,26 @@ class Project extends React.Component {
             }
         });
     }
+    handleDeleteProject(i, evt) {
+        var that = this;
+        console.log('delete');
+        $.ajax({
+            method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            url: '/api/v1/projects/' + this.state.projects[i].id,
+            success: function (result) {
+                console.log(result);
+                let projects =  that.state.projects;
+                projects.splice(i, 1);
+                that.setState({
+                    projects: projects,
+                });
+            }
+        });
+
+    }
 
 
     render() {
@@ -134,6 +154,7 @@ class Project extends React.Component {
                                         onChange={(evt)=>this.handleChangeInput(i, "project_url", evt)}/>
                                 </div>
                             </div>
+                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleDeleteProject(i,evt)}>-Delete</button>
                             <hr/>
                         </div>
                     ))}
