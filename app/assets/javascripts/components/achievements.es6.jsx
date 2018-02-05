@@ -83,6 +83,27 @@ class Achievement extends React.Component {
             }
         });
     }
+    handleDeleteAchievement(i, evt) {
+        var that = this;
+        console.log('delete');
+        $.ajax({
+            method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            url: '/api/v1/achievements/' + this.state.achievements[i].id,
+            success: function (result) {
+                console.log(result);
+                let achievements =  that.state.achievements;
+                achievements.splice(i, 1);
+                that.setState({
+                    achievements: achievements,
+                });
+            }
+        });
+
+    }
+
 
     render() {
         return (
@@ -123,10 +144,11 @@ class Achievement extends React.Component {
                                     type="text"
                                     value={item.description}
                                     onChange={(evt) => this.handleChangeInput(i, "description", evt)}/>
-
                             </div>
+                            <br/>
+                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleDeleteAchievement(i,evt)}>-Delete</button>
                             <hr/>
-                        </div>
+                            </div>
                     ))}
                 </div>
             </div>

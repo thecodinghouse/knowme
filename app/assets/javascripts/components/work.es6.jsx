@@ -82,6 +82,26 @@ class Work extends React.Component {
             }
         });
     }
+    handleDeleteWork(i, evt) {
+        var that = this;
+        console.log('delete');
+        $.ajax({
+            method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            url: '/api/v1/works/' + this.state.works[i].id,
+            success: function (result) {
+                console.log(result);
+                let works =  that.state.works;
+                works.splice(i, 1);
+                that.setState({
+                    works: works,
+                });
+            }
+        });
+
+    }
     
     render() {
         return (
@@ -153,7 +173,8 @@ class Work extends React.Component {
                                 </div>
                             </div>
                             </div>
-                        <hr/>
+                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleDeleteWork(i,evt)}>-Delete</button>
+                            <hr/>
                         </div>
                     ))}
                 </div>

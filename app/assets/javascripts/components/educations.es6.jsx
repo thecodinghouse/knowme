@@ -82,6 +82,26 @@ class Education extends React.Component {
             }
         });
     }
+    handleDeleteEducation(i, evt) {
+        var that = this;
+        console.log('delete');
+        $.ajax({
+            method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            url: '/api/v1/educations/' + this.state.educations[i].id,
+            success: function (result) {
+                console.log(result);
+                let educational_details =  that.state.educations;
+                educational_details.splice(i, 1);
+                that.setState({
+                    educations: educational_details,
+                });
+            }
+        });
+
+    }
 
 
     render() {
@@ -143,6 +163,7 @@ class Education extends React.Component {
                                             onChange={(evt)=>this.handleChangeInput(i, "year_of_end", evt)}/>
                                         </div>
                                     </div>
+                                <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleDeleteEducation(i,evt)}>-Delete</button>
                                 <hr/>
                             </div>
                         ))}
@@ -202,7 +223,7 @@ class Education extends React.Component {
                                         onChange={(evt)=>this.handleCreateFormInput("year_of_end", evt)}/>
                                     </div>
                                 </div>
-                          
+
                             </div>
                         </div>
                         <div className="modal-footer">

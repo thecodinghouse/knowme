@@ -29,6 +29,14 @@ class Api::V1::ProjectsController < Api::V1::BaseController
         render json: { errors: @p.errors.messages }, status: :bad_request
       end
     end
+    def destroy
+      @ed =current_user.projects.find(params[:id])
+      if @ed.destroy
+        render json: {success: true}
+      else
+        render json: {success: false}
+      end
+    end
 
     private
 

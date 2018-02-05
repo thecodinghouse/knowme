@@ -30,6 +30,15 @@ class Api::V1::EducationsController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    @ed =current_user.educations.find(params[:id])
+    if @ed.destroy
+      render json: {success: true}
+    else
+      render json: {success: false}
+    end
+  end
+
   private
 
   def details_params
