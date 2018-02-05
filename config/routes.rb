@@ -18,8 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/facebook/callback", to: "sessions#facebook"
+  get "/auth/github/callback", to: "sessions#github"
+  get "/auth/stackexchange/callback", to: "sessions#stackexchange"
   get 'auth/failure', to: redirect('/')
 
   resources :users
+  get "users/:id/github", to: "users#github", as: :github
+  get "users/:id/stackoverflow", to: "users#stackoverflow", as: :stackoverflow
 end

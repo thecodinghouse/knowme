@@ -39,7 +39,7 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'omniauth-facebook'
 gem "koala"
 
-gem 'omniauth-stackexchange'
+gem 'omniauth-stackexchange', git: 'https://github.com/nashby/omniauth-stackexchange.git'
 gem 'ruby-stackoverflow'
 
 group :development, :test do

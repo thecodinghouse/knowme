@@ -7,39 +7,7 @@ class Login extends React.Component{
     };
 
     componentDidMount() {
-        console.log(window.SE);
-        let SE = window.SE;
-        // SE.init({
-        //     clientId: 11729,
-        //     key: ')dMdcfU51TfrwZpqaicSHw((',
-        //     channelUrl: 'http://knowme.tixdo.com/',
-        //     complete: function (data) { 
-        //         $('#stackLogin').removeAttr('disabled');
-        //         $('#stackLogin').click(function() {
-        //             SE.authenticate({
-        //                 success: function(data) { 
-        //                     console.log("Authenticate", data);
-        //                     $.ajax({
-        //                         method: 'POST',
-        //                         data: that.state.user,
-        //                         url: '/api/v1/login',
-        //                         success: function(res) {
-        //                           localStorage.setItem("auth_token", res.auth_token)
-        //                           window.location.href =  res.detail_page
-        //                         },
-        //                         error: function(res) {  
-        //                           that.setState({errors: res.responseJSON.errors})
-        //                         }
-        //                     }); 
-        //                 },
-        //                 error: function(data) { 
-        //                     console.log("Authentication error:", data);
-        //                 },
-        //                 networkUsers: true
-        //             });
-        //         })
-        //     }
-        // });
+        console.log(window.SE);       
     }
 
     handleLogin() {
@@ -94,9 +62,9 @@ class Login extends React.Component{
                         </div>
                         
                         <button onClick={this.handleLogin.bind(this)} className="btn btn-primary btn-block">Log In</button>
-                        <a href="/auth/github" className="btn btn-dark btn-block" >Sign In with Github</a>
-                        <a href="/auth/facebook" className="btn btn-danger btn-block" >Sign In with Facebook</a>
-                        <a href="/auth/stackexchange" className="btn btn-warning btn-block" >Sign In with StackExchange</a>
+                        {/* <a href="/auth/github" className="btn btn-dark btn-block" >Sign In with Github</a> */}
+                        <a href="/auth/facebook" className="btn btn-primary btn-block" >Sign In with Facebook</a>
+                        {/* <a href="/auth/stackexchange" className="btn btn-warning btn-block" >Sign In with StackExchange</a> */}
                         {/* <button disabled id="stackLogin" className="btn btn-warning btn-block">Sign In with StackExchange</button> */}
                     </div>
                 </div>

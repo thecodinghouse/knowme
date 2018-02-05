@@ -4,6 +4,14 @@ GIT
   specs:
     bcrypt (3.1.11)
 
+GIT
+  remote: https://github.com/nashby/omniauth-stackexchange.git
+  revision: 11b776d79db4c86cdf585f6806eda3d1e0fe5aee
+  specs:
+    omniauth-stackexchange (0.2.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -144,9 +152,6 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
-    omniauth-stackexchange (0.2.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
     pg (0.21.0)
     pg (0.21.0-x86-mingw32)
     public_suffix (3.0.1)
@@ -255,7 +260,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   omniauth-facebook
   omniauth-github
-  omniauth-stackexchange
+  omniauth-stackexchange!
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
