@@ -17,4 +17,12 @@ class UsersController < ApplicationController
     def new
         render component: 'SignUp'
     end
+
+    def github
+        render component: 'Github', props:{page: stackoverflow_path(params[:id])}
+    end
+
+    def stackoverflow
+        render component: 'StackExchange', props:{page: user_path(params[:id])}
+    end
 end

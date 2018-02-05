@@ -9,22 +9,20 @@ class User < ApplicationRecord
     has_many :achievements
     has_and_belongs_to_many :skills, through: :skills_users
     has_many :projects
+    delegate :url_helpers, to: 'Rails.application.routes'
 
-
-    def self.from_omniauth(auth)
+    def self.from_omniauth(auth, user)
         account = SocialAccount.where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |account|
             account.email = auth.info.email
             account.uid = auth.uid
             account.provider = auth.provider
             account.avatar_url = auth.info.image
-            account.username = auth.info.name
-            account.oauth_token = auth.credentials.token
-            # create user object if not there
-            user = User.find_by_email(auth.info.email)
-            if user.blank?
-                user = User.create!(email: auth.info.email , password: auth.info.name , password_confirmation: auth.info.name)
-                Profile.create!(name: auth.info.name , user: user, image_url: auth.info.image)
+            if auth.provider == "stackexchange"
+                account.username = auth.info.nickname
+            else
+                account.username = auth.info.name
             end
+            account.oauth_token = auth.credentials.token
             account.user = user
             account.save!
         end
@@ -64,9 +62,21 @@ class User < ApplicationRecord
             #account.user.profile.update(hometown: profile["hometown"]) unless profile["hometown"].blank?
         end
         if auth.provider == 'stackexchange'
+            byebug
             # RubyStackoverflow.users_tags([], options={})
         end
 
         return account
+    end
+
+    def page
+        page = url_helpers.user_path(self.id)
+        providers = self.social_accounts.map(&:provider)
+        if !(providers.include? "github") 
+            page = url_helpers.github_path(self.id)
+        elsif !(providers.include? "stackexchange")
+            page = url_helpers.stackoverflow_path(self.id)
+        end
+        return page
     end
 end

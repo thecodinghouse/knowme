@@ -5,7 +5,7 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
         command = AuthenticateUser.call(params[:email], params[:password]) 
         if command.success? 
             session[:user_id] = command.result.id
-            render json: { auth_token: command.result.auth_token, detail_page: user_path(command.result.id), user_id: command.result.id} 
+            render json: { auth_token: command.result.auth_token, detail_page: @user.page, user_id: command.result.id} 
         else 
             render json: { errors: command.errors }, status: :unauthorized 
         end 
@@ -16,7 +16,7 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
         if @user.save
             Profile.create!(user: @user)
             session[:user_id] = @user.id
-            render json: { auth_token: @user.auth_token, detail_page: user_path(@user.id), user_id: @user.id} 
+            render json: { auth_token: @user.auth_token, detail_page: @user.page, user_id: @user.id} 
         else
             render json: { errors: @user.errors.messages }, status: :bad_request
         end
