@@ -12,7 +12,7 @@ class Profile extends React.Component{
     render() { 
         return (
             <div>
-                <UserProfile profile={this.state.profile}/>
+                <UserProfile profile={this.state.profile} user={this.state.user}/>
                 <Education user_id={this.state.user.id}/>
                 <Work user_id={this.state.user.id}/>
                 <Skill user_id={this.state.user.id}/>
