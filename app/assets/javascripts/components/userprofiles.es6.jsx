@@ -3,7 +3,8 @@ class UserProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            profile: props.profile
+            profile: props.profile,
+            errors:{}
         };
         this.typingTimer;
     };
@@ -26,6 +27,7 @@ class UserProfile extends React.Component {
     }
 
     doneTyping(data){
+        var that = this;
         $.ajax({
             method: 'PATCH',
             headers: {
@@ -34,7 +36,10 @@ class UserProfile extends React.Component {
             data: {profile: data},
             url: '/users/' + this.state.profile.id,
             success: function (result) {
-                console.log(result);
+                //console.log(result);
+            },
+            error: function(res) {
+                that.setState({errors: res.responseJSON.errors})
             }
         });
     }
@@ -72,6 +77,7 @@ class UserProfile extends React.Component {
                                 className="form-control"
                                 type="text"
                                 value={this.state.profile.hobbies}
+                                placeholder="seperate ur hobbies with comma(,)"
                                 onChange={(evt)=>this.handleChangeInput("hobbies", evt)}/>
                         </div>
                         <div className="col form-group">
@@ -79,6 +85,7 @@ class UserProfile extends React.Component {
                             <input
                                 className="form-control"
                                 type="text"
+                                placeholder="seperate languages with comma(,)"
                                 value={this.state.profile.languages}
                                 onChange={(evt)=>this.handleChangeInput("languages", evt)}/>
                         </div>
@@ -104,19 +111,23 @@ class UserProfile extends React.Component {
                         <div className="form-row">
                         <div className="col form-group">
                             <label>Maritial-Status</label>
-                            <input
-                                className="form-control"
-                                type="text"
-                                value={this.state.profile.marital_status}
-                                onChange={(evt)=>this.handleChangeInput("marital_status", evt)}/>
+                            <select className="form-control"
+                                    value={this.state.profile.marital_status}
+                                    onChange={(evt)=>this.handleChangeInput("marital_status", evt)}>
+                                <option>Married</option>
+                                <option>Single</option>
+                                <option>Divorced</option>
+                            </select>
                         </div>
                             <div className="col form-group">
                                 <label>Contact-Number</label>
                                 <input
                                     className="form-control"
                                     type="text"
+                                    placeholder="+91 XXXXXXXXXX"
                                     value={this.state.profile.contact_no}
                                     onChange={(evt)=>this.handleChangeInput("contact_no", evt)}/>
+                                <span style={{color:'red'}}>{this.state.errors.contact_no}</span>
                             </div>
                         </div>
                         <div className="form-row">
