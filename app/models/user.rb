@@ -37,8 +37,8 @@ class User < ApplicationRecord
                     account.user.educations.where('lower(institution) = ?', e["school"]["name"].downcase).first_or_initialize.tap do |edu|
                         edu.institution = e["school"]["name"]
                         edu.field_of_study =  e["concentration"][0]["name"] unless e["concentration"].blank?
+                        edu.education_type =  e["type"] unless e["type"].blank?
                         edu.save!
-                        #ed.update(type: e["type"]) unless e["type"].blank?
                     end
                 end
             end
@@ -61,10 +61,17 @@ class User < ApplicationRecord
             end
 
             account.user.profile.update(birthday: profile["birthday"]) unless profile["birthday"].blank?
-            #account.user.profile.update(hometown: profile["hometown"]) unless profile["hometown"].blank?
+            account.user.profile.update(hometown: profile["hometown"]["name"]) unless profile["hometown"].blank?
+            account.user.profile.update(current_location: profile["location"]["name"]) unless profile["location"].blank?
+        end
+        if auth.provider == 'github'
+            # byebug
+            # github = Github.new
+            # github.repos.list user: 'piotrmurach'
+
         end
         if auth.provider == 'stackexchange'
-            byebug
+            # byebug
             # RubyStackoverflow.users_tags([], options={})
         end
 

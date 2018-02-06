@@ -173,7 +173,7 @@ class Work extends React.Component {
                                 </div>
                             </div>
                             </div>
-                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleDeleteWork(i,evt)}>-Delete</button>
+                            <button type="button" className="btn btn-sm btn-danger" onClick={(evt)=>this.handleDeleteWork(i,evt)}>Delete</button>
                             <hr/>
                         </div>
                     ))}

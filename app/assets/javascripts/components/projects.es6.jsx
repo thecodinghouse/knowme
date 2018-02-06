@@ -154,7 +154,7 @@ class Project extends React.Component {
                                         onChange={(evt)=>this.handleChangeInput(i, "project_url", evt)}/>
                                 </div>
                             </div>
-                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleDeleteProject(i,evt)}>-Delete</button>
+                            <button type="button" className="btn btn-sm btn-danger" onClick={(evt)=>this.handleDeleteProject(i,evt)}>Delete</button>
                             <hr/>
                         </div>
                     ))}

@@ -146,7 +146,7 @@ class Achievement extends React.Component {
                                     onChange={(evt) => this.handleChangeInput(i, "description", evt)}/>
                             </div>
                             <br/>
-                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleDeleteAchievement(i,evt)}>-Delete</button>
+                            <button type="button" className="btn btn-sm btn-danger" onClick={(evt)=>this.handleDeleteAchievement(i,evt)}>Delete</button>
                             <hr/>
                             </div>
                     ))}
