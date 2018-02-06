@@ -65,14 +65,19 @@ class User < ApplicationRecord
             account.user.profile.update(current_location: profile["location"]["name"]) unless profile["location"].blank?
         end
         if auth.provider == 'github'
-            # byebug
-            # github = Github.new
-            # github.repos.list user: 'piotrmurach'
-
+            github = Github.new
+            repos = github.repos.list user: auth.info.nickname
+            account.meta_info = JSON.parse(repos.to_json)
+            account.save!
         end
         if auth.provider == 'stackexchange'
-            # byebug
-            # RubyStackoverflow.users_tags([], options={})
+            response = RubyStackoverflow.users_tags([auth.uid],{min: 1, max: 10, sort: 'popular' })
+            response.data.first.tags.each do |tag|
+                @skill = Skill.find_or_create_by(name: tag.name)
+                user.skills << @skill
+            end
+            account.meta_info = JSON.parse(auth.extra.to_json)
+            account.save!
         end
 
         return account
