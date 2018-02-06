@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Knowme</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Know.me</title>
+    <meta name="description" content="">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="<%=image_path("favicon.png")%>">
+    <link rel="icon" href="<%=image_path("favicon.png")%>" type="image/png">
+    <link rel="shortcut icon" href="<%=image_path("favicon.png")%>" type="image/x-icon">
+    <!-- Favicons End -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Open+sans:500" rel="stylesheet">
+    <!-- Google Fonts  End-->
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
-    <script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand text-info" href="<%=root_path%>"><strong>Know.me</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav justify-content-end">
-          <% if current_user.blank? %>
-            <li class="nav-item">
-              <a class="nav-link" href="<%=new_user_path%>">Sign up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<%=users_path%>">Log in</a>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to 'Logout', api_v1_logout_path(id: current_user.id), method: :delete, confirm: "Are you sure?", title: "Logout #{current_user.email}", class: "nav-link" %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+    <nav id="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <a href="<%=root_path%>" class="logo-brand">
+                        <img src="<%=image_path("logo.png")%>">
+                    </a>
+                    <ul class="float-right">
+                        <% if current_user.blank? %>
+                          <li >
+                            <a href="<%=new_user_path%>">Sign up</a>
+                          </li>
+                          <li >
+                            <a href="<%=users_path%>">Log in</a>
+                          </li>
+                        <% else %>
+                          <li >
+                            <%= link_to 'Logout', api_v1_logout_path(id: current_user.id), method: :delete, confirm: "Are you sure?", title: "Logout #{current_user.email}" %>
+                          </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </nav>
-    <div class="container mt-3">
+    <section id="wrapper">
+      <div class="container">
         <% flash.each do |key, value| %>
           <% if key == 'auth_token' %>
             <script type="text/javascript">localStorage.setItem("auth_token", "<%=value%>");</script>
@@ -45,7 +57,10 @@
             <div class="alert alert-<%= key %>"><%= value %></div>
           <% end %>
         <% end %>
-        <%= yield %>
-    </div>
+        <div class="row">
+          <%= yield %>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
