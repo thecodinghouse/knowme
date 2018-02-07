@@ -7,19 +7,30 @@ class Github extends React.Component{
 
 
     render() { 
-        return ( 
-            <div className="row mt-5 justify-content-center"> 
-                <div className="border border-secondary">
-                    <div className="m-5">
-                        <p>Connect you github account to fetch your Contibutions</p>
+        return (
+            <section className="bg-grey">
+                <div className="container">
+                    <div className="row justify-content-md-center">
+                        <div className="col col-md-6 col-lg-6 signup-cont text-center">
 
-                        <a href="/auth/github" className="btn btn-dark btn-block" >Sign In with Github</a>
-                        <div className="row mt-5 justify-content-center">
-                            <a href={this.state.next_page}>Skip</a>
+                            <h5>Connect your github account to fetch your Contibutions</h5>
+
+                            <div className="margin-tb30">
+
+                                <button className="btn btn-secondary">
+
+                                    <a href="/auth/github" className="btn btn-dark btn-block" >
+                                        <span className="fab fa-github"></span>Connect your Github</a>
+                                </button>
+
+
+                                <a href={this.state.next_page} className="skip-btn">Skip</a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </section>
         ) 
     } 
 }
@@ -33,19 +44,31 @@ class StackExchange extends React.Component{
 
 
     render() { 
-        return ( 
-            <div className="row mt-5 justify-content-center"> 
-                <div className="border border-secondary">
-                    <div className="m-5">
-                        <p>Connect you stackoverflow account to fetch your Repotations</p>
-                        
-                        <a href="/auth/stackexchange" className="btn btn-warning btn-block" >Sign In with StackExchange</a>
-                        <div className="row mt-5 justify-content-center">
-                            <a href={this.state.next_page}>Skip</a>
+        return (
+            <section className="bg-grey">
+                <div className="container">
+                    <div className="row justify-content-md-center">
+                        <div className="col col-md-6 col-lg-6 signup-cont text-center">
+
+                            <h5>Connect your stackoverflow account to fetch your Repotations</h5>
+
+                            <div className="margin-tb30">
+
+                                <button className="btn btn-secondary">
+
+                                    <a href="/auth/stackexchange" className="btn btn-dark btn-block" >
+                                        <span className="fab fa-stack-overflow"></span>
+                                        Connect with StackOverflow</a>
+                                </button>
+
+
+                                <a href={this.state.next_page} className="skip-btn">Skip</a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </section>
         ) 
     } 
 }

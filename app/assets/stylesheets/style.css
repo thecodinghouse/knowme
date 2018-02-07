@@ -213,3 +213,292 @@ body {
 .single-skill:hover .remove-skill{
     display: block;
 }
+
+body {
+    line-height: 1.5;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #252424;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.margin-t20{
+    margin-top: 20px;
+}
+.margin-tb20{
+    margin: 20px 0;
+}
+.margin-tb30{
+    margin: 30px 0;
+}
+.flex-grow {
+    flex: 1 0 auto;
+}
+
+#navigation{
+    height: 60px;
+    box-shadow: 0px 0px 15px #ddd;
+}
+#navigation .logo-brand img{
+    height: 24px;
+    margin: 18px 0;
+}
+#navigation ul{
+    list-style: none;
+}
+#navigation ul li{
+    display: inline-block;
+}
+#navigation ul li a{
+    color: #545454;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    padding: 18px;
+    display: block;
+    border-bottom: 3px solid transparent;
+    transition: all 0.5s ease;
+    font-size: 14px;
+}
+#navigation ul li a:hover{
+    border-bottom: 3px solid #54576e;
+    text-decoration: none;
+}
+#wrapper{
+    margin-top: 50px;
+}
+.profile-pic img{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 24px -3px rgba(43, 43, 43, 0.62);
+}
+.hide-input{
+    border:none;
+    background: rgba(0, 0, 0, 0.0);
+}
+.hide-input:focus{
+    outline: none;
+    border: none;
+}
+.basic-details .person-name{
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    font-size: 28px;
+    color: #444242;
+    letter-spacing: 0.5px;
+}
+.basic-details .person-designation{
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    font-size: 18px;
+    color: #444242;
+    letter-spacing: 0.5px;
+}
+.contact-details{
+    list-style: none;
+}
+.contact-details span.fa{
+    color: #333232;
+    margin-top: 7px;
+    margin-right: 5px;
+}
+.contact-details .person-email{
+    width: 100%;
+    font-size: 14px;
+    margin: 5px;
+    color: #333;
+}
+.contact-details .person-mobile{
+    width: 100%;
+    font-size: 14px;
+    margin: 5px;
+    color: #333;
+}
+.contact-details .person-address{
+    width: 100%;
+    font-size: 14px;
+    margin: 5px;
+    color: #333;
+}
+
+
+.border-top-1{
+    border-top: 1px solid #ddd;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.heading-h4{
+    color: #696666;
+    font-size: 20px;
+    margin: 20px 0;
+    font-weight: 600;
+}
+.company-name{
+    width: 100%;
+    font-size: 16px;
+    color: #56565a;
+}
+.company-designation{
+    width: 100%;
+    font-size: 15px;
+    color: #79797c;
+}
+.company-startdate{
+    width: 130px;
+    font-size: 15px;
+    color: #79797c;
+}
+.company-enddate{
+    width: 130px;
+    font-size: 15px;
+    color: #79797c;
+}
+.company-location{
+    width: 100%;
+    font-size: 15px;
+    color: #40405a;
+}
+
+.add-btn{
+    right: 26px;
+    top: 25px;
+    color: #288da7;
+}
+.delete-btn{
+    right: 10px;
+    top: 5px;
+    color: #b11515;
+    z-index: 10;
+}
+.single-exp{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid rgba(221, 221, 221, 0.45);
+    z-index: 10;
+}
+.person-about{
+    width: 100%;
+    font-size: 15px;
+    color: #40405a;
+    min-height: 100px;
+    line-height: 1.5;
+}
+.general-type span{
+    font-size: 14px;
+    padding-top: 2px;
+    padding-right: 6px;
+}
+.general-input{
+    font-size: 14px;
+}
+
+.year-input{
+    width: 45px;
+    text-align: center;
+}
+.single-skill{
+    display: inline-block;
+    background-color: rgba(186, 241, 230, 0.39);
+    padding: 5px 30px;
+    border-radius: 4px;
+    margin: 2px 2px 0 0;
+    border: 1px solid #baf1e6;
+    cursor: pointer;
+    position: relative;
+}
+.remove-skill{
+    position: absolute;
+    right: -1px;
+    top: -10px;
+    padding: 5px 6px;
+    background-color: #f3cece;
+    border-radius: 5px;
+    color: #a90e0e;
+    display: none;
+}
+.single-skill:hover .remove-skill{
+    display: block;
+}
+
+
+
+/*  signup and login forms */
+.bg-grey{
+    background-color: rgba(226, 234, 233, 0.52);
+    min-height: 100vh;
+    width: 100%;
+}
+.signup-cont{
+    background: #fff;
+    margin-top: 100px;
+    min-height: 200px;
+    border-radius: 4px;
+}
+
+.signup-cont{
+    padding-top: 50px;
+}
+.signup-cont h4{
+    padding-top: 15px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #737373;
+    line-height: 1.5;
+}
+
+.signup-cont h5{
+    padding-top: 15px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #737373;
+    line-height: 1.5;
+}
+
+
+.input-type-1{
+    width: 80%;
+    margin: 0 10%;
+    border-radius: 2px;
+    border-color: rgba(0, 0, 0, 0.52);
+    height: 54px;
+}
+.input-type-1:focus{
+    outline: none;
+}
+.submit-type-1{
+    width: 80%;
+    height: 60px;
+    margin: 5px 10%;
+    background-color: #193354;
+    color: #fff;
+}
+.login-fb{
+    width: 80%;
+    height: 60px;
+    margin: 5px 10%;
+    background-color: #3c5999;
+    color: #fff;
+    padding-top: 16px;
+}
+
+.skip-btn{
+    display: block;
+    margin-top: 50px;
+}
