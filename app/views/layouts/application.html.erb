@@ -53,19 +53,15 @@
             </div>
         </div>
     </nav>
-    <section id="wrapper">
-      <div class="container">
-        <% flash.each do |key, value| %>
-          <% if key == 'auth_token' %>
-            <script type="text/javascript">localStorage.setItem("auth_token", "<%=value%>");</script>
-          <% else %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
-          <% end %>
-        <% end %>
-        <div class="row">
-          <%= yield %>
-        </div>
-      </div>
-    </section>
+    <% flash.each do |key, value| %>
+      <% if key == 'auth_token' %>
+        <script type="text/javascript">localStorage.setItem("auth_token", "<%=value%>");</script>
+      <% else %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    <% end %>
+     
+    <%= yield %>
+ 
   </body>
 </html>

@@ -73,22 +73,22 @@ class Skill extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="row">
 
-                <div class="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
-                    <a href="#"  data-toggle="modal" data-target="#skillModal" class="position-absolute add-btn">
-                        <span class="fa fa-plus"></span>
+                <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
+                    <a href="#"  data-toggle="modal" data-target="#skillModal" className="position-absolute add-btn">
+                        <span className="fa fa-plus"></span>
                     </a>
 
 
-                    <h4 class="heading-h4">Skills</h4>
+                    <h4 className="heading-h4">Skills</h4>
 
-                    <div class="row">
-                        <div class="col">
+                    <div className="row">
+                        <div className="col">
                         {this.state.skills.map((item, i) => (
                 
-                            <div class="single-skill" key={i}>{item.name}
-                                <span class="fa fa-times  remove-skill" onClick={(evt)=>this.handleRemoveSkill(i)}></span>
+                            <div className="single-skill" key={i}>{item.name}
+                                <span className="fa fa-times  remove-skill" onClick={(evt)=>this.handleRemoveSkill(i)}></span>
                             </div>
                 
                         ))}
