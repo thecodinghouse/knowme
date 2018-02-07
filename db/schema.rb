@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207073235) do
+ActiveRecord::Schema.define(version: 20180207085851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title"
@@ -96,9 +97,10 @@ ActiveRecord::Schema.define(version: 20180207073235) do
     t.string   "email"
     t.string   "password_digest"
     t.boolean  "admin"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.string   "auth_token"
+    t.uuid     "uuid",            default: -> { "uuid_generate_v4()" }
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
   end
 

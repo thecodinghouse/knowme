@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-    skip_before_action :require_login, only: ['index', 'new']
+    skip_before_action :require_login, only: ['index', 'new', 'show']
 
     def index
         render component: 'Login'
     end
 
     def show
-        @user = User.find(params[:id])
+        @user = User.find_by_uuid(params[:id])
         render component: 'Profile', props:{user: @user, profile: @user.profile}
     end
 

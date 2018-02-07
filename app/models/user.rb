@@ -84,7 +84,7 @@ class User < ApplicationRecord
     end
 
     def page
-        page = url_helpers.user_path(self.id)
+        page = url_helpers.user_path(self.uuid)
         providers = self.social_accounts.map(&:provider)
         if !(providers.include? "github") 
             page = url_helpers.github_path(self.id)
