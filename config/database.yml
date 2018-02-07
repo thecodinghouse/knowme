@@ -13,7 +13,7 @@ default: &default
 
 production:
   <<: *default
-  host: db
+  host: localhost
   database: knowme_production
 
 development:

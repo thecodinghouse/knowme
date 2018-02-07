@@ -62,7 +62,6 @@ class Login extends React.Component {
                                 <div className="form-group ">
                                     <input type="email" className="form-control input-type-1"
                                            onChange={this.handleEmailChange.bind(this)}
-                                           id="exampleInputEmail1" aria-describedby="emailHelp"
                                            placeholder="Enter email"/>
                                     <small id="emailHelp" className="form-text text-muted">We'll never share your email
                                         with anyone else.
@@ -73,7 +72,6 @@ class Login extends React.Component {
                                 <div className="form-group">
                                     <input type="password" className="form-control input-type-1"
                                            onChange={this.handlePasswordChange.bind(this)}
-                                           id="exampleInputEmail1" aria-describedby="emailHelp"
                                            placeholder="Enter Password"/>
                                 </div>
                                 <div className="form-group">
@@ -86,7 +84,8 @@ class Login extends React.Component {
                                 <div className="form-group">
                                     <a href="/auth/facebook" className="form-control login-fb">
                                         <span className="fab fa-facebook-f"></span>
-                                        Sign in with Facebook</a>
+                                            
+                                            Sign in with Facebook</a>
 
                                 </div>
                             </div>

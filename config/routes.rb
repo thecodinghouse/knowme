@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   resources :users, only: ['index', 'show', 'new']
   get "users/:id/github", to: "users#github", as: :github
   get "users/:id/stackoverflow", to: "users#stackoverflow", as: :stackoverflow
+  get "users/:id/facebook", to: "users#facebook", as: :facebook
 end

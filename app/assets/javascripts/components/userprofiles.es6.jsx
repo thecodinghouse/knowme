@@ -112,7 +112,7 @@ class UserProfile extends React.Component {
                         <div className="col-lg-12 "></div>
                         <p className="col-lg-12 d-flex general-type">
                             <span>Languages : </span>
-                            <input type="text" className="general-input hide-input flex-grow" placeholder="Java, Python, Ruby, ..."
+                            <input type="text" className="general-input hide-input flex-grow" placeholder="English, Hindi, Marathi, ..."
                                 value={this.state.profile.languages || ''} onChange={(evt)=>this.handleChangeInput("languages", evt)}/>
                         </p>
 
