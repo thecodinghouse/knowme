@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :works, :only =>['create', 'index', 'update', 'destroy']
       patch 'educations_update', to: 'educations#bulk_update'
       patch 'works_update', to: 'works#bulk_update'
-      resources :skills, :only =>['create', 'index', 'delete']
+      resources :skills, :only =>['create', 'index', 'destroy']
       resources :achievements, :only =>['create', 'update', 'index', 'destroy']
       patch 'achievements_update', to: 'achievements#bulk_update'
       resources :projects, :only =>['create', 'update', 'index', 'destroy']

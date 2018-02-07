@@ -13,5 +13,6 @@ module Knowme
     # -- all .rb files in that directory are automatically loaded.
     # config.autoload_paths << Rails.root.join('lib')
     Koala.config.api_version = 'v2.0'
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

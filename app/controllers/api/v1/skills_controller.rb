@@ -16,7 +16,7 @@ class Api::V1::SkillsController < Api::V1::BaseController
     render json: @s
   end
 
-  def delete
+  def destroy
     @s = Skill.find(params[:id])
     current_user.skills.delete(@s)
     render json: {success: true}
