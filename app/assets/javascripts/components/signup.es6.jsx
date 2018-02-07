@@ -49,32 +49,47 @@ class SignUp extends React.Component{
         //     alert = <div className="alert alert-danger text-capitalize" role="alert">{this.state.errors.user_authentication}</div>;
         // }
 
-        return ( 
-            <div className="row mt-5 justify-content-center"> 
-                <div className="border border-secondary">
-                    <div className="m-5">
-                    {/* {alert} */}
-                    <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="email" className="form-control" aria-describedby="emailHelp" placeholder="enter email" onChange={this.handleEmailChange.bind(this)} />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                        <span style={{color:'red'}}>{this.state.errors.email}</span>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" className="form-control" placeholder="password" onChange={this.handlePasswordChange.bind(this)} />
-                        <span style={{color:'red'}}>{this.state.errors.password}</span>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Confirm Password</label>
-                        <input type="password" className="form-control" placeholder="confirm password" onChange={this.handleConfirmPasswordChange.bind(this)}  />
-                        <span style={{color:'red'}}>{this.state.errors.password_confirmation}</span>
-                    </div>
-                    
-                    <button onClick={this.handleSignUp.bind(this)}  className="btn btn-primary btn-block">Sign Up</button>
+        return (
+            <section className="bg-grey">
+                <div className="container">
+                    <div className="row justify-content-md-center">
+                        <div className="col col-md-6 col-lg-6 signup-cont text-center">
+
+                            <h4>Sign up</h4>
+
+                            <div className="margin-tb30">
+                                <div className="form-group ">
+                                    <input type="email" className="form-control input-type-1"
+                                           id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+                                           onChange={this.handleEmailChange.bind(this)} />
+                                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <span style={{color:'red'}}>{this.state.errors.email}</span>
+                                </div>
+
+                                <div className="form-group">
+                                    <input type="password" className="form-control input-type-1"
+                                           id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password"
+                                           onChange={this.handlePasswordChange.bind(this)} />
+                                    <span style={{color:'red'}}>{this.state.errors.password}</span>
+                                </div>
+
+                                <div className="form-group">
+                                    <input type="password" className="form-control input-type-1"
+                                           id="exampleInputEmail1" aria-describedby="emailHelp"
+                                           placeholder="Confirm Password" onChange={this.handleConfirmPasswordChange.bind(this)}/>
+                                    <span style={{color:'red'}}>{this.state.errors.password_confirmation}</span>
+                                </div>
+
+                                <div className="form-group">
+                                    <input type="submit" className="form-control submit-type-1"
+                                           onClick={this.handleSignUp.bind(this)}
+                                           value="Sign up"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div> 
-        ) 
-    } 
+            </section>
+        )
+    }
 }
