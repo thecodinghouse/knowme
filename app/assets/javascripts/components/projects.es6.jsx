@@ -107,113 +107,80 @@ class Project extends React.Component {
 
     render() {
         return (
-            <div>
-            <div className="row card mt-5">
-                <div className="card-header">
-                    Projects
-                    <button type="button" className="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#projectModal" >+ Add Project</button>
-                </div>
-                <div className="card-body">
+            <div className="row">
+                <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
+                    <a href="#"  data-toggle="modal" data-target="#projectModal"  className="position-absolute add-btn">
+                        <span className="fa fa-plus"></span>
+                    </a>
+
+                    <h4 className="heading-h4">Projects</h4>
                     {this.state.projects.map((item,i) => (
-                        <div className="mt-2" key={i}>
-
-                            <div className="form-row">
-                                <div className="col form-group">
-                                    <label>Title</label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        value={item.title}
-                                        onChange={(evt)=>this.handleChangeInput(i, "title", evt)}/>
-
-                                </div>
-                                <div className="col form-group">
-                                    <label>Team Size</label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        value={item.team_size}
-                                        onChange={(evt)=>this.handleChangeInput(i, "team_size", evt)}/>
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="col form-group">
-                                    <label>Description</label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        value={item.description}
-                                        onChange={(evt)=>this.handleChangeInput(i, "description", evt)}/>
-                                </div>
-                                <div className="col form-group">
-                                    <label>Project Url</label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        value={item.project_url}
-                                        onChange={(evt)=>this.handleChangeInput(i, "project_url", evt)}/>
-                                </div>
-                            </div>
-                            <button type="button" className="btn btn-sm btn-danger" onClick={(evt)=>this.handleDeleteProject(i,evt)}>Delete</button>
-                            <hr/>
+                        <div className="single-exp position-relative" key={i}>
+                            <a href="javascript:void(0)" onClick={(evt)=>this.handleDeleteProject(i,evt)} className="position-absolute delete-btn">
+                                <span className="fa fa-trash"></span>
+                            </a>
+                            <input type="text" className="company-name hide-input col-lg-12" placeholder="Project title" value={item.title || ''} onChange={(evt)=>this.handleChangeInput(i, "title", evt)}/>
+                            <input type="text" className="company-designation hide-input col-lg-12" placeholder="http://www.example.com" value={item.project_url || ''} onChange={(evt)=>this.handleChangeInput(i, "project_url", evt)}/>
+                            
+                            <textarea type="text" className="person-about hide-input col-lg-12" placeholder="Your Name" spellCheck="false" value={item.description || ''} onChange={(evt)=>this.handleChangeInput(i, "description", evt)}>
+                            </textarea>
                         </div>
                     ))}
                 </div>
-            </div>
-            <div className="modal fade" id="projectModal" role="dialog" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">New Project</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="mt-2">
-                                <div className="form-row">
-                                    <div className="col form-group">
-                                        <label>Title</label>
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            onChange={(evt)=>this.handleCreateFormInput("title", evt)}/>
+                <div className="modal fade" id="projectModal" role="dialog" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">New Project</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="mt-2">
+                                    <div className="form-row">
+                                        <div className="col form-group">
+                                            <label>Title</label>
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                onChange={(evt)=>this.handleCreateFormInput("title", evt)}/>
 
+                                        </div>
+                                        <div className="col form-group">
+                                            <label>Team Size</label>
+                                            <input
+                                                className="form-control"
+                                                type="number"
+                                                onChange={(evt)=>this.handleCreateFormInput("team_size", evt)}/>
+                                        </div>
                                     </div>
-                                    <div className="col form-group">
-                                        <label>Team Size</label>
-                                        <input
-                                            className="form-control"
-                                            type="number"
-                                            onChange={(evt)=>this.handleCreateFormInput("team_size", evt)}/>
+                                    <div className="form-row">
+                                        <div className="col form-group">
+                                            <label>Description</label>
+                                            <textarea
+                                                className="form-control"
+                                                onChange={(evt)=>this.handleCreateFormInput( "description", evt)}></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-row">
-                                    <div className="col form-group">
-                                        <label>Description</label>
-                                        <textarea
-                                            className="form-control"
-                                            onChange={(evt)=>this.handleCreateFormInput( "description", evt)}></textarea>
-                                    </div>
-                                </div>
-                                <div className="form-row">
-                                    <div className="col form-group">
-                                        <label>Project Url</label>
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            onChange={(evt)=>this.handleCreateFormInput("project_url", evt)}/>
+                                    <div className="form-row">
+                                        <div className="col form-group">
+                                            <label>Project Url</label>
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                onChange={(evt)=>this.handleCreateFormInput("project_url", evt)}/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleAddProject()}>Add Project</button>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleAddProject()}>Add Project</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         )
     }

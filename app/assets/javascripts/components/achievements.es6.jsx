@@ -107,97 +107,72 @@ class Achievement extends React.Component {
 
     render() {
         return (
-            <div>
-            <div className="row card mt-5">
-                <div className="card-header">
-                    Achievements
-                    <button type="button" className="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#achievementModal" >+ Add Achievement</button>
-                </div>
-                <div className="card-body">
-                    {this.state.achievements.map((item, i) => (
-                        <div className="mt-2" key={i}>
+            <div className="row">
+                <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
+                    <a href="#"  data-toggle="modal" data-target="#achievementModal"  className="position-absolute add-btn">
+                        <span className="fa fa-plus"></span>
+                    </a>
 
-                            <div className="form-row">
-                                <div className="col form-group">
-                                    <label>Title</label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        value={item.title}
-                                        onChange={(evt) => this.handleChangeInput(i, "title", evt)}/>
-                                </div>
-                                <div className="col form-group">
-                                    <label>Year Of Issue:</label>
-                                    <input
-                                        className="form-control"
-                                        type="date"
-                                        value={item.year_issued}
-                                        onChange={(evt) => this.handleChangeInput(i, "year_issued", evt)}/>
-                                </div>
-
-                            </div>
-                            <div className="form-row">
-
-                                <label>Description</label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    value={item.description}
-                                    onChange={(evt) => this.handleChangeInput(i, "description", evt)}/>
-                            </div>
-                            <br/>
-                            <button type="button" className="btn btn-sm btn-danger" onClick={(evt)=>this.handleDeleteAchievement(i,evt)}>Delete</button>
-                            <hr/>
-                            </div>
+                    <h4 className="heading-h4">Achievements</h4>
+                    {this.state.achievements.map((item,i) => (
+                        <div className="single-exp position-relative" key={i}>
+                            <a href="javascript:void(0)" onClick={(evt)=>this.handleDeleteAchievement(i,evt)} className="position-absolute delete-btn">
+                                <span className="fa fa-trash"></span>
+                            </a>
+                            <input type="text" className="company-name hide-input col-lg-12" placeholder="Title of your achievement" value={item.title || ''} onChange={(evt) => this.handleChangeInput(i, "title", evt)}/>
+                            <input type="date" className="company-designation hide-input col-lg-12" placeholder="Issued date: DD/MM/YYYY" value={item.year_issued || ''} onChange={(evt) => this.handleChangeInput(i, "year_issued", evt)}/>
+                            
+                            <textarea type="text" className="person-about hide-input col-lg-12" placeholder="What's your achievement about." spellcheck="false" value={item.description || ''} onChange={(evt)=>this.handleChangeInput(i, "description", evt)}>
+                            </textarea>
+                        </div>
                     ))}
                 </div>
-            </div>
-            <div className="modal fade" id="achievementModal" role="dialog" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">New Achievement</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="mt-2">
-                            <div className="form-row">
-                                <div className="col form-group">
-                                    <label>Title</label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        onChange={(evt) => this.handleCreateFormInput("title", evt)}/>
+
+                <div className="modal fade" id="achievementModal" role="dialog" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">New Achievement</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="mt-2">
+                                <div className="form-row">
+                                    <div className="col form-group">
+                                        <label>Title</label>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            onChange={(evt) => this.handleCreateFormInput("title", evt)}/>
+                                    </div>
+                                    <div className="col form-group">
+                                        <label>Year Of Issue:</label>
+                                        <input
+                                            className="form-control"
+                                            type="date"
+                                            onChange={(evt) => this.handleCreateFormInput("year_issued", evt)}/>
+                                    </div>
+
                                 </div>
-                                <div className="col form-group">
-                                    <label>Year Of Issue:</label>
-                                    <input
+                                <div className="form-row">
+
+                                    <label>Description</label>
+                                    <textarea
                                         className="form-control"
-                                        type="date"
-                                        onChange={(evt) => this.handleCreateFormInput("year_issued", evt)}/>
+                                        onChange={(evt) => this.handleCreateFormInput("description", evt)}></textarea>
+
                                 </div>
-
+                                </div>
                             </div>
-                            <div className="form-row">
-
-                                <label>Description</label>
-                                <textarea
-                                    className="form-control"
-                                    onChange={(evt) => this.handleCreateFormInput("description", evt)}></textarea>
-
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleAddAchievement()}>Add Achievement</button>
                             </div>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleAddAchievement()}>Add Achievement</button>
                         </div>
                     </div>
                 </div>
-            </div>
-
             </div>
         )
     }

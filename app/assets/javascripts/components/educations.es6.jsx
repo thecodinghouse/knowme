@@ -106,34 +106,61 @@ class Education extends React.Component {
 
     render() {
         return (
-            <div>
-            <div className="row card mt-5">
-                    <div className="card-header">
-                        Educational Profile
-                        <button type="button" className="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#educationModal" >+ Add Education</button>
-                    </div>
-                    <div className="card-body">
+            <div className="row">
+            <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
+                        <a href="#" data-toggle="modal" data-target="#educationModal" className="position-absolute add-btn">
+                            <span className="fa fa-plus"></span>
+                        </a>
+    
+    
+                        <h4 className="heading-h4">Educational Details</h4>
                         {this.state.educations.map((item,i) => (
-                            <div className="mt-2" key={i}>
-                                    <div className="form-row">
-                                        <div className="col form-group">
-                                            <label>Institution</label>
-                                            <input
-                                                className="form-control"
-                                                type="text"
-                                                value={item.institution}
-                                                onChange={(evt)=>this.handleChangeInput(i, "institution", evt)}/>
+                        <div className="single-exp position-relative" key={i}>
+                            <a href="javascript:void(0)" onClick={(evt)=>this.handleDeleteEducation(i,evt)} className="position-absolute delete-btn">
+                                <span className="fa fa-trash"></span>
+                            </a>
+                            <input type="text" className="company-name hide-input col-lg-12" placeholder="Institution Name" value={item.institution || ''} onChange={(evt)=>this.handleChangeInput(i, "institution", evt)}/>
+                            <input type="text" className="company-designation hide-input col-lg-12" placeholder="Field of study ex.(Computer Science Engineering)" value={item.field_of_study || ''} onChange={(evt)=>this.handleChangeInput(i, "field_of_study", evt)}/>
+                            
+                            <input type="text" className="general-input hide-input col-lg-12" placeholder="Degree ex.(Bachalor of Engineering)" value={item.degree || ''} onChange={(evt)=>this.handleChangeInput(i, "degree", evt)}/>
+                            
+                            <div className="col-lg-12">
+                                    <input type="date" className="year-input hide-input " placeholder="Start date: DD/MM/YYYY" value={item.year_of_start || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_start", evt)}/> - 
+                                    <input type="text" className="year-input hide-input " placeholder="End date: DD/MM/YYYY" value={item.year_of_end || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_end", evt)}/>
+                            </div>
+                            
+                        </div>
+                        ))}
+                </div>
 
+                <div className="modal fade" id="educationModal" role="dialog" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">New Education</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="mt-2">
+                                <div className="form-row">
+                                            <div className="col form-group">
+                                                <label>Institution</label>
+                                                <input
+                                                    className="form-control"
+                                                    type="text"
+                                                    onChange={(evt)=>this.handleCreateFormInput( "institution", evt)}/>
+
+                                            </div>
                                         </div>
-                                    </div>
                                     <div className="form-row">
                                         <div className="col form-group">
                                             <label>Degree</label>
                                             <input
                                                 className="form-control"
                                                 type="text"
-                                                value={item.degree}
-                                                onChange={(evt)=>this.handleChangeInput(i, "degree", evt)}/>
+                                                onChange={(evt)=>this.handleCreateFormInput("degree", evt)}/>
 
                                         </div>
                                         <div className="col form-group">
@@ -141,8 +168,7 @@ class Education extends React.Component {
                                             <input
                                                 className="form-control"
                                                 type="text"
-                                            value={item.field_of_study}
-                                            onChange={(evt)=>this.handleChangeInput(i, "field_of_study", evt)}/>
+                                            onChange={(evt)=>this.handleCreateFormInput( "field_of_study", evt)}/>
                                         </div>
                                     </div>
                                     <div className="form-row">
@@ -151,89 +177,26 @@ class Education extends React.Component {
                                             <input
                                                 className="form-control"
                                                 type="date"
-                                            value={item.year_of_start}
-                                            onChange={(evt)=>this.handleChangeInput(i, "year_of_start", evt)}/>
+                                            onChange={(evt)=>this.handleCreateFormInput("year_of_start", evt)}/>
                                         </div>
                                         <div className="col form-group">
                                             <label>Year Of end</label>
                                             <input
                                             className="form-control"
                                             type="date"
-                                            value={item.year_of_end}
-                                            onChange={(evt)=>this.handleChangeInput(i, "year_of_end", evt)}/>
+                                            onChange={(evt)=>this.handleCreateFormInput("year_of_end", evt)}/>
                                         </div>
                                     </div>
-                                <button type="button" className="btn btn-sm btn-danger" onClick={(evt)=>this.handleDeleteEducation(i,evt)}>Delete</button>
-                                <hr/>
-                            </div>
-                        ))}
-                    </div>
-            </div>
-            <div className="modal fade" id="educationModal" role="dialog" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">New Education</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="mt-2">
-                            <div className="form-row">
-                                        <div className="col form-group">
-                                            <label>Institution</label>
-                                            <input
-                                                className="form-control"
-                                                type="text"
-                                                onChange={(evt)=>this.handleCreateFormInput( "institution", evt)}/>
 
-                                        </div>
-                                    </div>
-                                <div className="form-row">
-                                    <div className="col form-group">
-                                        <label>Degree</label>
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            onChange={(evt)=>this.handleCreateFormInput("degree", evt)}/>
-
-                                    </div>
-                                    <div className="col form-group">
-                                        <label>Field Of Study</label>
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                        onChange={(evt)=>this.handleCreateFormInput( "field_of_study", evt)}/>
-                                    </div>
                                 </div>
-                                <div className="form-row">
-                                    <div className="col form-group">
-                                        <label>Year Of start</label>
-                                        <input
-                                            className="form-control"
-                                            type="date"
-                                        onChange={(evt)=>this.handleCreateFormInput("year_of_start", evt)}/>
-                                    </div>
-                                    <div className="col form-group">
-                                        <label>Year Of end</label>
-                                        <input
-                                        className="form-control"
-                                        type="date"
-                                        onChange={(evt)=>this.handleCreateFormInput("year_of_end", evt)}/>
-                                    </div>
-                                </div>
-
                             </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleAddEducation()}>Add Education</button>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleAddEducation()}>Add Education</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
             </div>
         )
     }

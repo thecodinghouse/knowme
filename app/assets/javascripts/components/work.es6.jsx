@@ -105,7 +105,7 @@ class Work extends React.Component {
     render() {
         return (
 
-            <div>
+            <div className="row">
                 <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
                     <a href="#" data-toggle="modal" data-target="#experienceModal" className="position-absolute add-btn">
                         <span className="fa fa-plus"></span>
@@ -116,11 +116,11 @@ class Work extends React.Component {
                         <a href="javascript:void(0)" onClick={(evt)=>this.handleDeleteWork(i,evt)} className="position-absolute delete-btn">
                             <span className="fa fa-trash"></span>
                         </a>
-                        <input type="text" className="company-name hide-input col-lg-12" placeholder="Company Name" value={item.company_name} onChange={(evt) => this.handleChangeInput(i, "company_name", evt)}/>
-                        <input type="text" className="company-designation hide-input col-lg-12" placeholder="Designation" value={item.designation} onChange={(evt) => this.handleChangeInput(i, "designation", evt)}/>
-                        <input type="date" className="company-startdate hide-input col-lg-12" placeholder="DD/MM/YYYY" value={item.year_of_start} onChange={(evt) => this.handleChangeInput(i, "year_of_start", evt)}/> To
-                        <input type="date" className="company-enddate hide-input col-lg-12" placeholder="DD/MM/YYYY" value={item.year_of_end} onChange={(evt) => this.handleChangeInput(i, "year_of_end", evt)}/>
-                        <input type="text" className="company-location hide-input col-lg-12" placeholder="Location" value={item.location} onChange={(evt) => this.handleChangeInput(i, "location", evt)}/>
+                        <input type="text" className="company-name hide-input col-lg-12" placeholder="Company Name" value={item.company_name || ''} onChange={(evt) => this.handleChangeInput(i, "company_name", evt)}/>
+                        <input type="text" className="company-designation hide-input col-lg-12" placeholder="Designation" value={item.designation || ''} onChange={(evt) => this.handleChangeInput(i, "designation", evt)}/>
+                        <input type="date" className="company-startdate hide-input col-lg-12" placeholder="DD/MM/YYYY" value={item.year_of_start || ''} onChange={(evt) => this.handleChangeInput(i, "year_of_start", evt)}/> To
+                        <input type="date" className="company-enddate hide-input col-lg-12" placeholder="DD/MM/YYYY" value={item.year_of_end || ''} onChange={(evt) => this.handleChangeInput(i, "year_of_end", evt)}/>
+                        <input type="text" className="company-location hide-input col-lg-12" placeholder="Location" value={item.location || ''} onChange={(evt) => this.handleChangeInput(i, "location", evt)}/>
                     </div>
                     ))}
                 </div>
