@@ -18,8 +18,9 @@ class Github extends React.Component{
                             <div className="margin-tb30">
 
                                 <button className="btn btn-secondary">
-                                    <span className="fab fa-github"></span>
-                                    <a href="/auth/github" className="btn btn-dark btn-block" >Connect your Github</a>
+
+                                    <a href="/auth/github" className="btn btn-dark btn-block" >
+                                        <span className="fab fa-github"></span>Connect your Github</a>
                                 </button>
 
 
@@ -54,8 +55,9 @@ class StackExchange extends React.Component{
                             <div className="margin-tb30">
 
                                 <button className="btn btn-secondary">
-                                    <span className="fab fa-stack-overflow"></span>
+
                                     <a href="/auth/stackexchange" className="btn btn-dark btn-block" >
+                                        <span className="fab fa-stack-overflow"></span>
                                         Connect with StackOverflow</a>
                                 </button>
 

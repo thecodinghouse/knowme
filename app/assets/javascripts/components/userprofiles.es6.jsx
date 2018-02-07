@@ -35,7 +35,7 @@ class UserProfile extends React.Component {
                 "Authorization": localStorage.getItem('auth_token'),
             },
             data: {profile: data},
-            url: '/users/' + this.state.profile.id,
+            url: '/api/v1/users/' + this.state.profile.id,
             success: function (result) {
                 //console.log(result);
             },
@@ -57,7 +57,7 @@ class UserProfile extends React.Component {
                                 </div>
                                 <div className="basic-details col-lg-8 col-md-8">
                                     <input type="text" className="person-name hide-input" placeholder="Full Name" value={this.state.profile.name || ''} onChange={(evt)=>this.handleChangeInput("name", evt)}/>
-                                    <input type="text" className="person-designation hide-input" placeholder="Designation" defaultValue="Android Developer"/>
+                                    <input type="text" className="person-designation hide-input" placeholder="Designation" value={this.state.profile.title || ''} onChange={(evt)=>this.handleChangeInput("title", evt)}/>
                                 </div>
                             </div>
                         </div>

@@ -5,15 +5,6 @@ class UsersController < ApplicationController
         render component: 'Login'
     end
 
-    def update
-        @p = current_user.profile
-        if @p.update(details_params)
-            render json: @p
-        else
-            render json: { errors: @p.errors.messages }, status: :bad_request
-        end
-    end
-
     def show
         @user = User.find(params[:id])
         render component: 'Profile', props:{user: @user, profile: @user.profile}
@@ -29,13 +20,6 @@ class UsersController < ApplicationController
 
     def stackoverflow
         render component: 'StackExchange', props:{page: user_path(params[:id])}
-    end
-
-    private
-
-    def details_params
-        params.require(:profile).permit(:name, :birthday, :current_location, :hobbies, :languages,
-                                        :hometown, :marital_status, :about_me, :contact_no)
     end
 
 end
