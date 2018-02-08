@@ -16,7 +16,7 @@ class Github extends React.Component{
                             <h5>Connect your github account to fetch your Contibutions</h5>
 
                             <div className="margin-tb30">
-                                <a href="/auth/github" className="btn btn-dark" >
+                                <a href="/auth/github" className="btn btn-dark social-btn-type git-btn" >
                                         <span className="fab fa-github"></span>  Connect your Github</a>
                                 <a href={this.state.next_page} className="skip-btn">Skip</a>
 
@@ -47,7 +47,7 @@ class StackExchange extends React.Component{
                             <h5>Connect your stackoverflow account to fetch your Repotations</h5>
 
                             <div className="margin-tb30">
-                                <a href="/auth/stackexchange" className="btn btn-warning" >
+                                <a href="/auth/stackexchange" className="btn btn-warning stack-btn social-btn-type" >
                                 <span className="fab fa-stack-overflow"></span>  Connect with StackOverflow</a>
                              
                                 <a href={this.state.next_page} className="skip-btn">Skip</a>
@@ -78,7 +78,7 @@ class Facebook extends React.Component{
                             <h5>Connect your facebook account to fetch your Personal detail, Work experience, Education.</h5>
 
                             <div className="margin-tb30">
-                                <a href="/auth/stackexchange" className="btn btn-primary" >
+                                <a href="/auth/facebook" className="btn btn-primary fb-btn social-btn-type" >
                                 <span className="fab fa-facebook-f"></span>  Connect your Facebook</a>
                              
                                 <a href={this.state.next_page} className="skip-btn">Skip</a>

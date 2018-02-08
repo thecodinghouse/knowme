@@ -44,12 +44,10 @@ class Login extends React.Component {
         if (Object.keys(this.state.errors).length === 0) {
             alert = '';
         } else {
-            alert = <div className="alert alert-danger text-capitalize"
+            alert = <div className="error text-upercase"
                          role="alert">{this.state.errors.user_authentication}</div>;
         }
         return (
-
-
             <section className="bg-grey">
                 <div className="container">
                     <div className="row justify-content-md-center">
@@ -58,14 +56,12 @@ class Login extends React.Component {
                             <h4>Login</h4>
 
                             <div className="margin-tb30">
-                                {alert}
+                                
                                 <div className="form-group ">
                                     <input type="email" className="form-control input-type-1"
                                            onChange={this.handleEmailChange.bind(this)}
                                            placeholder="Enter email"/>
-                                    <small id="emailHelp" className="form-text text-muted">We'll never share your email
-                                        with anyone else.
-                                    </small>
+                                    
 
                                 </div>
 
@@ -74,6 +70,7 @@ class Login extends React.Component {
                                            onChange={this.handlePasswordChange.bind(this)}
                                            placeholder="Enter Password"/>
                                 </div>
+                                {alert}
                                 <div className="form-group">
                                     <input type="submit" className="form-control submit-type-1" value="Login"
                                            onClick={this.handleLogin.bind(this)}/>

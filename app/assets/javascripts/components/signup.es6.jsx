@@ -62,21 +62,21 @@ class SignUp extends React.Component{
                                     <input type="email" className="form-control input-type-1"
                                             placeholder="Enter email"
                                            onChange={this.handleEmailChange.bind(this)} />
-                                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                                    <span style={{color:'red'}}>{this.state.errors.email}</span>
+                                    
+                                    <p className="error text-uppercase"> {this.state.errors.email}</p>
                                 </div>
 
                                 <div className="form-group">
                                     <input type="password" className="form-control input-type-1"
                                             placeholder="Enter Password"
                                            onChange={this.handlePasswordChange.bind(this)} />
-                                    <span style={{color:'red'}}>{this.state.errors.password}</span>
+                                  <p className="error text-uppercase"> {this.state.errors.password}</p>
                                 </div>
 
                                 <div className="form-group">
                                     <input type="password" className="form-control input-type-1"
                                            placeholder="Confirm Password" onChange={this.handleConfirmPasswordChange.bind(this)}/>
-                                    <span style={{color:'red'}}>{this.state.errors.password_confirmation}</span>
+                                    <p className="error text-uppercase"> {this.state.errors.password_confirmation}</p>
                                 </div>
 
                                 <div className="form-group">

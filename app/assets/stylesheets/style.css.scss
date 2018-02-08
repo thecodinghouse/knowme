@@ -228,7 +228,7 @@ body {
 }
 .signup-cont{
     background: #fff;
-    margin-top: 100px;
+    margin-top: 50px;
     min-height: 200px;
     border-radius: 4px;
 }
@@ -283,6 +283,33 @@ body {
     width: 80%;
     height: 60px;
     margin: 5px 10%;
+    background-color: #3c5999;
+    color: #fff;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-transform: capitalize;
+    padding-top: 18px;
+    position: relative;
+
+    span{
+        position: absolute;
+    left: 28px;
+    top: 21px;
+    }
+    &:hover{
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+.submit-type-1:focus,.login-fb:focus{
+    outline: none;
+}
+.submit-type-1:focus{
+    background-color: #193354;
+    color: #fff;
+}
+.login-fb:focus{
     background-color: #3c5999;
     color: #fff;
 }
@@ -761,4 +788,37 @@ ol{
 }
 .blue_color{
     color: #4b6adc;
+}
+
+.error{
+    margin-left: 10%;
+    color: #d00c0c;
+    letter-spacing: 0.5px;
+    padding: 10px 0;
+    font-weight: 400;
+    text-align: left;
+    font-size: 10px;
+}
+
+.social-btn-type{
+    font-size: 12px;
+    box-shadow: 0px 0px 12px #3b5898;
+    padding: 10px 20px;
+    span{
+        padding-right: 20px;
+    }
+}
+
+.fb-btn{
+    background-color: #3b5898;
+    border-color: #3b5898;
+}
+.git-btn{
+    background-color: #0E2635;
+    border-color: #0E2635;
+}
+.stack-btn{
+    background-color: #F27F30;
+    border-color: #F27F30;
+    color: #fff;
 }
