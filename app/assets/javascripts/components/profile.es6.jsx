@@ -9,6 +9,19 @@ class Profile extends React.Component{
         };
     };
 
+    componentDidMount(){
+        $(document).ajaxComplete(function() {
+            $('textarea').each(function(){
+                $(this).css('height',this.scrollHeight);
+            });
+            
+        });
+
+        $(document).on('change keyup','textarea',function(){
+            $('textarea').css('height',this.scrollHeight);
+        });
+    }
+
     render() { 
         return (
             <section id="wrapper">

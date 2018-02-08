@@ -10,6 +10,14 @@ class UserProfile extends React.Component {
         this.typingTimer;
     };
 
+    componentDidMount(){
+
+        $(document).on('click','.profile-pic',function(e){
+            $('#image-upload').click();
+            return false;
+        });
+    }
+
 
     handleChangeInput(key, e) {
         let profile = this.state.profile;
@@ -67,14 +75,7 @@ class UserProfile extends React.Component {
         });
     }
 
-    render() {
-        let image = ""
-        if(this.state.profile.image_url){
-            image = <img src={this.state.profile.image_url + '?type=large'}/>
-        }else{
-            image = <div className='default-pic text-uppercase'>upload <br/>profile picture</div>
-        }
-
+    render() {        
         return (
             <div className="row">
                 <div className="col-lg-12">
@@ -82,15 +83,16 @@ class UserProfile extends React.Component {
                         <div className="col-lg-8">
                             <div className="row">
                                 <div className="profile-pic col-lg-4 col-md-4">
-                                    {image}
-                                    <img id="profile_picture" src={this.state.profile.image_url}/>
-
-
-                                    <form id="upload_form" encType="multipart/form-data" method="post">
-                                       <input type="file" name="image" id="image"/>
-                                    </form>
-                                    <button className="btn btn-sm btn-primary" onClick={()=> this.startUploading()}>Upload</button>
+                                    
+                                        <img id="profile_picture" src={this.state.profile.image_url || '/assets/defaultpic.jpg'}/>
+                
+                                    
                                 </div>
+                                
+                                <form id="upload_form" hidden encType="multipart/form-data" method="post">
+                                            <input type="file"  name="image" id="image-upload" onChange={()=> this.startUploading()}/>
+                                        </form>
+
                                 <div className="basic-details col-lg-8 col-md-8">
                                     <input type="text" className="person-name hide-input" placeholder="Full Name" value={this.state.profile.name || ''} onChange={(evt)=>this.handleChangeInput("name", evt)}/>
                                     <input type="text" className="person-designation hide-input" placeholder="Set title that describes you" value={this.state.profile.title || ''} onChange={(evt)=>this.handleChangeInput("title", evt)}/>

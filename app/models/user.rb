@@ -19,7 +19,6 @@ class User < ApplicationRecord
             account.email = auth.info.email
             account.uid = auth.uid
             account.provider = auth.provider
-            account.avatar_url = auth.info.image
             if auth.provider == "stackexchange"
                 account.username = auth.info.nickname
             else
@@ -30,6 +29,8 @@ class User < ApplicationRecord
             account.save!
         end
         if auth.provider == 'facebook'
+            account.avatar_url = auth.info.image + '?type=large'
+            account.save!
             facebook = Koala::Facebook::API.new(auth.credentials.token)
             profile = facebook.get_object("me?fields=education,work,location,birthday,hometown")
             

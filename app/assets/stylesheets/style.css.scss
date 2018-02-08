@@ -135,21 +135,22 @@ body {
     width: 100%;
     font-size: 16px;
     color: #56565a;
+    font-weight: 600;
 }
 .company-designation{
     width: 100%;
     font-size: 15px;
-    color: #79797c;
+    color: #404040;
 }
 .company-startdate{
-    width: 130px;
+    width: 170px;
     font-size: 15px;
-    color: #79797c;
+    color: #404040;
 }
 .company-enddate{
-    width: 130px;
+    width: 170px;
     font-size: 15px;
-    color: #79797c;
+    color: #404040;
 }
 .company-location{
     width: 100%;
@@ -197,12 +198,13 @@ body {
 .single-skill{
     display: inline-block;
     background-color: rgba(186, 241, 230, 0.39);
-    padding: 5px 30px;
+    padding: 2px 30px;
     border-radius: 4px;
-    margin: 2px 2px 0 0;
+    margin: 4px 7px 0 0;
     border: 1px solid #baf1e6;
     cursor: pointer;
     position: relative;
+    font-weight: 400;
 }
 .remove-skill{
     position: absolute;
@@ -822,3 +824,25 @@ ol{
     border-color: #F27F30;
     color: #fff;
 }
+.hide-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #c5c4c4;
+  }
+  .hide-input::-moz-placeholder { /* Firefox 19+ */
+    color: #c5c4c4;
+  }
+  .hide-input:-ms-input-placeholder { /* IE 10+ */
+    color: #c5c4c4;
+  }
+  .hide-input:-moz-placeholder { /* Firefox 18- */
+    color: #c5c4c4;
+  }
+  textarea{
+      min-height: 80px;
+  }
+
+  .public_view .hide-input {
+    pointer-events: none;
+  }
+  .public_view .add-btn ,.public_view .delete-btn ,.public_view .remove-skill,.single-skill:hover .remove-skill{
+      display: none;
+  }

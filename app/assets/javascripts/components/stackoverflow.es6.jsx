@@ -31,6 +31,7 @@ class StackExchangeRepo extends React.Component{
 
     render() { 
         return (
+            <div className="row">
             <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
                 <h4 className="heading-h4">Stackoverflow</h4>
                 {this.state.stack.map((item, i) => (
@@ -82,6 +83,7 @@ class StackExchangeRepo extends React.Component{
                             </aside>
                 </div>
                 ))}
+            </div>
             </div>
         ) 
     } 
