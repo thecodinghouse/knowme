@@ -4,8 +4,9 @@ class Skill extends React.Component {
         super(props);
         this.state = {
             skills: [],
+            all_skills: [],
             user_id: props.user_id,
-            skill:{}
+            // skill:{}
         };
     };
 
@@ -19,33 +20,47 @@ class Skill extends React.Component {
             url: '/api/v1/skills/?id=' + this.state.user_id,
             success: function (result) {
                 that.setState({
-                    skills: result,
+                    skills: result.user_skills,
+                    all_skills: result.all_skills
+                });
+
+                $('#skill-tags').selectize({
+                    plugins: ['restore_on_backspace'],
+                    delimiter: ',',
+                    persist: false,
+                    options: result.all_skills,
+                    create: function(input) {
+                        return {
+                            value: input,
+                            text: input
+                        }
+                    }
                 });
             }
         });
     };
 
-    handleCreateFormInput(key, e) {
-        let skill = this.state.skill;
-        skill[key] = e.target.value;
-        this.setState({skill: skill});
-    }
+    // handleCreateFormInput(key, e) {
+    //     let skill = this.state.skill;
+    //     skill[key] = e.target.value;
+    //     this.setState({skill: skill});
+    // }
 
     handleAddSkill(){ 
-        var that = this  
+        let that = this  
+        let skill_value = $('#skill-tags').val();
+
+        console.log(skill_value);
         $.ajax({
             method: 'POST',
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            data: {skill: that.state.skill},
+            data: {skill: {name: skill_value}},
             url: '/api/v1/skills',
             success: function (result) {
-                console.log(result);
-                let skills =  that.state.skills
-                skills.push(result)
                 that.setState({
-                    skills: skills,
+                    skills: result,
                 })
                 $('#skillModal').modal('hide');
             }
@@ -113,9 +128,10 @@ class Skill extends React.Component {
                                         <div className="col form-group">
                                             <label>Skill name</label>
                                             <input
-                                                className="form-control"
+                                                id="skill-tags"
+                                                className="form-control selectized hide-input"
                                                 type="text"
-                                                onChange={(evt)=>this.handleCreateFormInput("name", evt)}/>
+                                                />
                                         </div>
                                     </div>
                                 </div>
