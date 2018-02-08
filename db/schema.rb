@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207085851) do
+ActiveRecord::Schema.define(version: 20180208100404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20180207085851) do
     t.index ["user_id"], name: "index_educations_on_user_id", using: :btree
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.binary   "data"
+    t.string   "file_name"
+    t.string   "content_type"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_photos_on_user_id", using: :btree
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
     t.date     "birthday"
@@ -54,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180207085851) do
     t.string   "about_me"
     t.string   "contact_no"
     t.string   "title"
+    t.string   "image"
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true, using: :btree
   end
 
@@ -119,6 +130,7 @@ ActiveRecord::Schema.define(version: 20180207085851) do
 
   add_foreign_key "achievements", "users"
   add_foreign_key "educations", "users"
+  add_foreign_key "photos", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "social_accounts", "users"
   add_foreign_key "works", "users"
