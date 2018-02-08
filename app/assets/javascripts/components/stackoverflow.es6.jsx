@@ -7,6 +7,7 @@ class StackExchangeRepo extends React.Component{
             user_id: props.user_id, 
             stack:[]
         };
+        
     };
 
     componentDidMount(){
@@ -16,11 +17,13 @@ class StackExchangeRepo extends React.Component{
             headers: {
                 "Authorization": localStorage.getItem('auth_token'),
             },
-            url: '/api/v1/users/stackoverflow?id='+ this.state.user_id,
+            url: '/api/v1/users/stackoverflow?id='+ that.state.user_id,
             success: function (result) {
-                that.setState({
-                    stack: [result],
-                });
+                if(!(Object.keys(result).length === 0)){
+                    that.setState({
+                        stack: [result],
+                    });
+                }
             }
         });
     }

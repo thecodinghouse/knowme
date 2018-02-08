@@ -50,7 +50,7 @@ class UserProfile extends React.Component {
         if(this.state.profile.image_url){
             image = <img src={this.state.profile.image_url + '?type=large'}/>
         }else{
-            image = <div class='default-pic text-uppercase'>upload <br/>profile picture</div>
+            image = <div className='default-pic text-uppercase'>upload <br/>profile picture</div>
         }
 
         return (
