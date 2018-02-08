@@ -1,5 +1,26 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  skip_before_action :authenticate_request, only: ['index']
+  skip_before_action :authenticate_request, only: ['index', 'serve']
+
+  def create
+    @photo = Photo.new
+    @photo.data      = params[:image].read
+    @photo.file_name  = params[:image].original_filename
+    @photo.content_type = params[:image].content_type
+    @photo.user = current_user
+    if @photo.save
+      image_path = api_v1_serve_photo_path(current_user.id)
+      current_user.profile.image_url = api_v1_serve_photo_path(current_user.id)
+      current_user.profile.save!
+      render json: {success: true, image_path: image_path}
+    else
+      render json: { errors: @use.errors.messages }, status: :bad_request
+    end
+  end
+
+  def serve
+    @user = User.find(params[:id])
+    send_data(@user.photo.data, :type => @user.photo.content_type, :filename => "#{@user.photo.file_name}", :disposition => "inline")
+  end
 
   def index
     @user = User.find(params[:id])
@@ -14,6 +35,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       render json: { errors: @p.errors.messages }, status: :bad_request
     end
   end
+
 
   private
 

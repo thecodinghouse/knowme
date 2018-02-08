@@ -3,6 +3,7 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 6, maximum: 20 }, on: :create
     has_secure_token :auth_token
     has_one :profile
+    has_one :photo
     validates :email, presence: true, uniqueness: true
     validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
     has_many :social_accounts
