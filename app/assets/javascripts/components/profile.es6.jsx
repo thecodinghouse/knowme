@@ -19,6 +19,8 @@ class Profile extends React.Component{
                     <Skill user_id={this.state.user.id}/>
                     <Achievement user_id={this.state.user.id}/>
                     <Project user_id={this.state.user.id}/>
+                    <GithubRepo user_id={this.state.user.id}/>
+                    <StackExchangeRepo user_id={this.state.user.id}/>
                 </div>
             </section>
         )

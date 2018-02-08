@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  skip_before_action :authenticate_request, only: ['index', 'serve']
+  skip_before_action :authenticate_request, only: ['index', 'serve', 'github_info', 'stackoverflow_info']
 
   def create
     @photo = Photo.new
@@ -36,6 +36,26 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
   end
 
+  def github
+    @user = User.find(params[:id])
+    sa = @user.social_accounts.where(provider: 'github').first
+    if sa.blank?
+      render json: []
+    else
+      render json: sa.meta_info
+    end
+
+  end
+
+  def stackoverflow
+    @user = User.find(params[:id])
+    sa = @user.social_accounts.where(provider: 'stackexchange').first
+    if sa.blank?
+      render json: {}
+    else
+      render json: sa.meta_info
+    end
+  end
 
   private
 

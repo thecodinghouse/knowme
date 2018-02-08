@@ -5,8 +5,7 @@ class UsersController < ApplicationController
         if current_user.blank?
             render component: 'Login'
         else
-            @user = User.find_by_uuid(current_user.uuid)
-            render component: 'Profile', props:{user: current_user, profile: current_user.profile}
+            redirect_to current_user.page
         end 
     end
 
@@ -19,8 +18,7 @@ class UsersController < ApplicationController
         if current_user.blank?
             render component: 'SignUp'
         else
-            @user = User.find_by_uuid(current_user.uuid)
-            render component: 'Profile', props:{user: current_user, profile: current_user.profile}
+            redirect_to current_user.page
         end 
     end
 

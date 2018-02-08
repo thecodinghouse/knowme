@@ -122,7 +122,7 @@ class Achievement extends React.Component {
                             <input type="text" className="company-name hide-input col-lg-12" placeholder="Title of your achievement" value={item.title || ''} onChange={(evt) => this.handleChangeInput(i, "title", evt)}/>
                             <input type="date" className="company-designation hide-input col-lg-12" placeholder="Issued date: DD/MM/YYYY" value={item.year_issued || ''} onChange={(evt) => this.handleChangeInput(i, "year_issued", evt)}/>
                             
-                            <textarea type="text" className="person-about hide-input col-lg-12" placeholder="What's your achievement about." spellcheck="false" value={item.description || ''} onChange={(evt)=>this.handleChangeInput(i, "description", evt)}>
+                            <textarea type="text" className="person-about hide-input col-lg-12" placeholder="What's your achievement about." spellCheck="false" value={item.description || ''} onChange={(evt)=>this.handleChangeInput(i, "description", evt)}>
                             </textarea>
                         </div>
                     ))}

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       resources :projects, only: ['create', 'update', 'index', 'destroy']
       patch 'projects_update', to: 'projects#bulk_update'
       resources :users, only: ['index', 'update', 'create']
+      get "users/github", to: "users#github", as: :github
+      get "users/stackoverflow", to: "users#stackoverflow", as: :stackoverflow
       get "users/:id/serve", to: 'users#serve', as: :serve_photo
     end
   end
