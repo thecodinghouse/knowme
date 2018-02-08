@@ -27,6 +27,28 @@ class UserProfile extends React.Component {
         }, 3000);
     }
 
+    startUploading (){
+        let formData = new FormData($('#upload_form')[0]);
+        $.ajax({
+            method: 'POST',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            data:formData,
+            url: '/api/v1/users',
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                console.log(result);
+                $("#profile_picture").attr('src',result.image_path);
+            },
+            error: function(res) {
+                this.setState({errors: res.responseJSON.errors})
+            }
+        })
+    }
+
     doneTyping(data){
         var that = this;
         $.ajax({
@@ -61,6 +83,13 @@ class UserProfile extends React.Component {
                             <div className="row">
                                 <div className="profile-pic col-lg-4 col-md-4">
                                     {image}
+                                    <img id="profile_picture" src={this.state.profile.image_url}/>
+
+
+                                    <form id="upload_form" encType="multipart/form-data" method="post">
+                                       <input type="file" name="image" id="image"/>
+                                    </form>
+                                    <button className="btn btn-sm btn-primary" onClick={()=> this.startUploading()}>Upload</button>
                                 </div>
                                 <div className="basic-details col-lg-8 col-md-8">
                                     <input type="text" className="person-name hide-input" placeholder="Full Name" value={this.state.profile.name || ''} onChange={(evt)=>this.handleChangeInput("name", evt)}/>
