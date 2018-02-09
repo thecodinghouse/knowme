@@ -78,13 +78,22 @@ class Login extends React.Component {
 
                                 <p>OR</p>
 
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <a href="/auth/facebook" className="form-control login-fb">
                                         <span className="fab fa-facebook-f"></span>
                                             
                                             Sign in with Facebook</a>
 
+                                </div> */}
+
+                                <div className="form-group">
+                                    <a href="/auth/github" className="form-control login-fb">
+                                        <span className="fab fa-github"></span>
+                                            
+                                            Sign in with github</a>
+
                                 </div>
+
                             </div>
 
                         </div>
