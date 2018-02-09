@@ -87,10 +87,10 @@ class User < ApplicationRecord
     def page
         page = url_helpers.profile_path(self.uuid)
         providers = self.social_accounts.map(&:provider)
-        if !(providers.include? "facebook") 
-            page = url_helpers.facebook_path(self.uuid)
-        elsif !(providers.include? "github") 
+        if !(providers.include? "github") 
             page = url_helpers.github_path(self.uuid)
+        elsif !(providers.include? "facebook") 
+            page = url_helpers.facebook_path(self.uuid)
         elsif !(providers.include? "stackexchange")
             page = url_helpers.stackoverflow_path(self.uuid)
         end

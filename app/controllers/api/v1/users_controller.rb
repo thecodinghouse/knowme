@@ -11,7 +11,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       image_path = api_v1_serve_photo_path(current_user.id)
       current_user.profile.image_url = api_v1_serve_photo_path(current_user.id)
       current_user.profile.save!
-      render json: {success: true, image_path: image_path}
+      render json: {success: true, image_path: image_path+'?d='+Time.now.to_s}
     else
       render json: { errors: @use.errors.messages }, status: :bad_request
     end

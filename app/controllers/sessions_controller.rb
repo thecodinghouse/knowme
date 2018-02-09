@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
   def github
     auth = env["omniauth.auth"]
     showMsg = false
+    byebug
     user = User.find_by_email(auth.info.email)
     if user.blank?
         user = User.create!(email: auth.info.email , password: 'password123' , password_confirmation: 'password123')

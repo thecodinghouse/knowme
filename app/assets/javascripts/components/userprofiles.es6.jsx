@@ -85,7 +85,7 @@ class UserProfile extends React.Component {
                             <div className="row " >
                                 <div className="profile-pic col-lg-4 col-md-4 col-4">
                                     
-                                        <img id="profile_picture" src={this.state.profile.image_url || this.state.defaultPic}/>
+                                    <img id="profile_picture" src={this.state.profile.image_url || this.state.defaultPic}/>
                 
                                     
                                 </div>
@@ -112,7 +112,7 @@ class UserProfile extends React.Component {
                                 </li>
                                 <li className="d-flex">
                                     <span className="fa fa-map-marker"></span>
-                                    <textarea type="text" className="person-address hide-input" placeholder="Your Name" spellCheck="false" value={this.state.profile.current_location || ''} onChange={(evt)=>this.handleChangeInput("current_location", evt)}></textarea>
+                                    <textarea type="text" className="person-address hide-input" placeholder="Your current location" spellCheck="false" value={this.state.profile.current_location || ''} onChange={(evt)=>this.handleChangeInput("current_location", evt)}></textarea>
 
                                 </li>
 

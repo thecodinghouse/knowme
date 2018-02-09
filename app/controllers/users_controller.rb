@@ -28,11 +28,11 @@ class UsersController < ApplicationController
     end
 
     def facebook
-        render component: 'Facebook', props:{page: github_path(params[:id])}
+        render component: 'Facebook', props:{page: stackoverflow_path(params[:id])}
     end
 
     def github
-        render component: 'Github', props:{page: stackoverflow_path(params[:id])}
+        render component: 'Github', props:{page: facebook_path(params[:id])}
     end
 
     def stackoverflow
