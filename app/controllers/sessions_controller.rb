@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     user = User.find_by_email(auth.info.email)
     if user.blank?
         user = User.create!(email: auth.info.email , password: 'password123' , password_confirmation: 'password123')
-        Profile.create!(name: auth.info.name , user: user, image_url: auth.info.image)
+        image_path = auth.info.image+ '?type=large'
+        Profile.create!(name: auth.info.name , user: user, image_url: image_path)
         showMsg = true
     end
   
