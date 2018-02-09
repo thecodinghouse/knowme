@@ -6,7 +6,8 @@ class Profile extends React.Component{
         this.state = {
             user: props.user,
             profile: props.profile,
-            view: props.view
+            view: props.view,
+            defaultPic: props.defaultPic
         };
     };
 
@@ -27,7 +28,7 @@ class Profile extends React.Component{
         return (
             <section id="wrapper" className={this.state.view}>
                 <div className="container">
-                    <UserProfile profile={this.state.profile} user={this.state.user}/>
+                    <UserProfile profile={this.state.profile} user={this.state.user} defaultPic={this.state.defaultPic}/>
                     <Education user_id={this.state.user.id}/>
                     <Work user_id={this.state.user.id}/>
                     <Skill user_id={this.state.user.id}/>

@@ -5,7 +5,8 @@ class UserProfile extends React.Component {
         this.state = {
             profile: props.profile,
             user: props.user,
-            errors:{}
+            errors:{},
+            defaultPic: props.defaultPic
         };
         this.typingTimer;
     };
@@ -84,7 +85,7 @@ class UserProfile extends React.Component {
                             <div className="row " >
                                 <div className="profile-pic col-lg-4 col-md-4 col-4">
                                     
-                                        <img id="profile_picture" src={this.state.profile.image_url || '/assets/defaultpic.jpg'}/>
+                                        <img id="profile_picture" src={this.state.profile.image_url || this.state.defaultPic}/>
                 
                                     
                                 </div>

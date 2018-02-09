@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :require_login, only: ['index', 'new', 'show']
-
+    
     def index
         if current_user.blank?
             render component: 'Login'
@@ -15,7 +15,8 @@ class UsersController < ApplicationController
         if current_user && current_user == @user
             className = ""
         end
-        render component: 'Profile', props:{user: @user, profile: @user.profile, view: className}
+        default_user_path = ActionController::Base.helpers.asset_url("defaultpic.jpg")
+        render component: 'Profile', props:{user: @user, profile: @user.profile, view: className, defaultPic: default_user_path}
     end
 
     def new
