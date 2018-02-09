@@ -41,6 +41,8 @@ gem "koala"
 gem 'omniauth-stackexchange', git: 'https://github.com/nashby/omniauth-stackexchange.git'
 gem 'ruby-stackoverflow'
 
+gem 'rails_admin'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

@@ -125,8 +125,8 @@ class Education extends React.Component {
                             <input type="text" className="general-input hide-input col-lg-12" placeholder="Degree ex.(Bachalor of Engineering)" value={item.degree || ''} onChange={(evt)=>this.handleChangeInput(i, "degree", evt)}/>
                             
                             <div className="col-lg-12">
-                                    <input type="date" className="year-input hide-input " placeholder="Start date: DD/MM/YYYY" value={item.year_of_start || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_start", evt)}/> - 
-                                    <input type="text" className="year-input hide-input " placeholder="End date: DD/MM/YYYY" value={item.year_of_end || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_end", evt)}/>
+                                    <input type="date" className="year-input hide-input " value={item.year_of_start || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_start", evt)}/> <span className="to_space">To</span> 
+                                    <input type="date" className="year-input hide-input " value={item.year_of_end || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_end", evt)}/>
                             </div>
                             
                         </div>
