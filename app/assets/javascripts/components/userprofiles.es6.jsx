@@ -79,10 +79,10 @@ class UserProfile extends React.Component {
         return (
             <div className="row">
                 <div className="col-lg-12">
-                    <div className="row">
+                    <div className="row position-relative">
                         <div className="col-lg-8">
-                            <div className="row">
-                                <div className="profile-pic col-lg-4 col-md-4">
+                            <div className="row " >
+                                <div className="profile-pic col-lg-4 col-md-4 col-4">
                                     
                                         <img id="profile_picture" src={this.state.profile.image_url || '/assets/defaultpic.jpg'}/>
                 
@@ -90,16 +90,16 @@ class UserProfile extends React.Component {
                                 </div>
                                 
                                 <form id="upload_form" hidden encType="multipart/form-data" method="post">
-                                            <input type="file"  name="image" id="image-upload" onChange={()=> this.startUploading()}/>
+                                            <input type="file"  name="image" id="image-upload" onChange={()=> this.startUploading()} accept="image/*"/>
                                         </form>
 
-                                <div className="basic-details col-lg-8 col-md-8">
+                                <div className="basic-details col-lg-8 col-md-8 col-6">
                                     <input type="text" className="person-name hide-input" placeholder="Full Name" value={this.state.profile.name || ''} onChange={(evt)=>this.handleChangeInput("name", evt)}/>
                                     <input type="text" className="person-designation hide-input" placeholder="Set title that describes you" value={this.state.profile.title || ''} onChange={(evt)=>this.handleChangeInput("title", evt)}/>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-4 contactdetails_cont">
                             <ul className="contact-details">
                                 <li className="d-flex">
                                     <span className="fa fa-envelope"></span>
@@ -134,11 +134,13 @@ class UserProfile extends React.Component {
                             <input type="date" className="general-input hide-input flex-grow" placeholder="DD/MM/YYYY" value={this.state.profile.birthday || ''} onChange={(evt)=>this.handleChangeInput("birthday", evt)}/>
                         </p>
 
-                        <p className="col-lg-5 d-flex general-type">
-                            <span>Merital Status :</span>
-                            <input type="text" className="general-input hide-input flex-grow" placeholder="Married/Single"
-                                value={this.state.profile.marital_status || ''} onChange={(evt)=>this.handleChangeInput("marital_status", evt)}/>
+                        <p className="col-lg-8 d-flex general-type">
+                            <span>Languages : </span>
+                            <input type="text" className="general-input hide-input flex-grow" placeholder="English, Hindi, Marathi, ..."
+                                value={this.state.profile.languages || ''} onChange={(evt)=>this.handleChangeInput("languages", evt)}/>
                         </p>
+
+                        
 
                         <div className="col-lg-12"></div>
                         <p className="col-lg-4 d-flex general-type">
@@ -147,18 +149,20 @@ class UserProfile extends React.Component {
                                 value={this.state.profile.hometown || ''} onChange={(evt)=>this.handleChangeInput("hometown", evt)}/>
                         </p>
 
-                        <div className="col-lg-12 "></div>
-                        <p className="col-lg-12 d-flex general-type">
-                            <span>Languages : </span>
-                            <input type="text" className="general-input hide-input flex-grow" placeholder="English, Hindi, Marathi, ..."
-                                value={this.state.profile.languages || ''} onChange={(evt)=>this.handleChangeInput("languages", evt)}/>
-                        </p>
-
-                        <p className="col-lg-12 d-flex general-type">
+                        <p className="col-lg-8 d-flex general-type">
                             <span>Hobbies : </span>
                             <input type="text" className="general-input hide-input flex-grow" placeholder="Reading, Cricket, ..."
                                 value={this.state.profile.hobbies || ''} onChange={(evt)=>this.handleChangeInput("hobbies", evt)}/>
                         </p>
+
+                        <div className="col-lg-12 "></div>
+                        <p className="col-lg-5 d-flex general-type">
+                            <span>Merital Status :</span>
+                            <input type="text" className="general-input hide-input flex-grow" placeholder="Married/Single"
+                                value={this.state.profile.marital_status || ''} onChange={(evt)=>this.handleChangeInput("marital_status", evt)}/>
+                        </p>
+
+                        
                     </div>
                 </div>
             </div>       
