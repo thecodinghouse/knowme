@@ -11,7 +11,11 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by_uuid(params[:id])
-        render component: 'Profile', props:{user: @user, profile: @user.profile}
+        className = "public_view"
+        if current_user && current_user == @user
+            className = ""
+        end
+        render component: 'Profile', props:{user: @user, profile: @user.profile, view: className}
     end
 
     def new
@@ -31,7 +35,7 @@ class UsersController < ApplicationController
     end
 
     def stackoverflow
-        render component: 'StackExchange', props:{page: user_path(params[:id])}
+        render component: 'StackExchange', props:{page: profile_path(params[:id])}
     end
 
 end

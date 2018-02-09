@@ -43,7 +43,7 @@ class Main extends React.Component{
                             <div className="col-md-4 single-feature">
                             <span className="far fa-edit icons_features blue_color"></span>
                                 <h5>Easy Customization</h5>
-                                <p>Know.me provides very easy platform to gather all information from your socail profiles and later easily customized, you can edit the information inline without any hesitation.</p>
+                                <p>Know.me provides very easy platform to gather all information from your social profiles and later easily customized, you can edit the information inline without any hesitation.</p>
                             </div>
                         </div>
                     </div>

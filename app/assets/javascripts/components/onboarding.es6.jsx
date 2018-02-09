@@ -13,7 +13,7 @@ class Github extends React.Component{
                     <div className="row justify-content-md-center">
                         <div className="col col-md-6 col-lg-6 signup-cont text-center">
 
-                            <h5>Connect your github account to fetch your Contibutions</h5>
+                            <h5>Connect your github account to fetch your Repositories</h5>
 
                             <div className="margin-tb30">
                                 <a href="/auth/github" className="btn btn-dark social-btn-type git-btn" >
@@ -44,7 +44,7 @@ class StackExchange extends React.Component{
                     <div className="row justify-content-md-center">
                         <div className="col col-md-6 col-lg-6 signup-cont text-center">
 
-                            <h5>Connect your stackoverflow account to fetch your Repotations</h5>
+                            <h5>Connect your stackoverflow account to fetch your Reputations</h5>
 
                             <div className="margin-tb30">
                                 <a href="/auth/stackexchange" className="btn btn-warning stack-btn social-btn-type" >
@@ -75,7 +75,7 @@ class Facebook extends React.Component{
                     <div className="row justify-content-md-center">
                         <div className="col col-md-6 col-lg-6 signup-cont text-center">
 
-                            <h5>Connect your facebook account to fetch your Personal detail, Work experience, Education.</h5>
+                            <h5>Connect your facebook account to fetch your Personal detail, Work Experience, Education.</h5>
 
                             <div className="margin-tb30">
                                 <a href="/auth/facebook" className="btn btn-primary fb-btn social-btn-type" >

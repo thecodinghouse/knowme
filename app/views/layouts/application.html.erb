@@ -36,11 +36,11 @@
                         <img src="<%=image_path("logo.png")%>">
                     </a>
                     <ul class="float-right">
-                        <li >
-                            <a href="javascript:void(0);" onclick="return exportToPdf();"> Export <span class="far fa-file-pdf"></span></a>
-                            
-                        </li>
-
+                        <% if request.path.include?('/profile/') %>
+                          <li >
+                              <a href="javascript:void(0);" onclick="return exportToPdf();"> Export <span class="far fa-file-pdf"></span></a>
+                          </li>
+                        <% end %>
                         <% if current_user.blank? %>
                           <li >
                             <a href="<%=new_user_path%>">Sign up</a>
@@ -50,7 +50,7 @@
                           </li>
                         <% else %>
                         <li >
-                            <%= link_to 'Profile', user_path(id: current_user.uuid)  %>
+                            <%= link_to 'Profile', profile_path(id: current_user.uuid)  %>
                           </li>
 
                           <li >

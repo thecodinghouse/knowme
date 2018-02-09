@@ -86,7 +86,7 @@ class User < ApplicationRecord
     end
 
     def page
-        page = url_helpers.user_path(self.uuid)
+        page = url_helpers.profile_path(self.uuid)
         providers = self.social_accounts.map(&:provider)
         if !(providers.include? "facebook") 
             page = url_helpers.facebook_path(self.uuid)

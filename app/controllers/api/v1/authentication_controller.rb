@@ -16,7 +16,8 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
         if @user.save
             Profile.create!(user: @user)
             session[:user_id] = @user.id
-            render json: { auth_token: @user.auth_token, detail_page: @user.page, user_id: @user.id} 
+            user = User.find(@user.id)
+            render json: { auth_token: @user.auth_token, detail_page: user.page, user_id: @user.id} 
         else
             render json: { errors: @user.errors.messages }, status: :bad_request
         end

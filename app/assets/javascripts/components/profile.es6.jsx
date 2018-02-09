@@ -5,7 +5,8 @@ class Profile extends React.Component{
     
         this.state = {
             user: props.user,
-            profile: props.profile
+            profile: props.profile,
+            view: props.view
         };
     };
 
@@ -24,7 +25,7 @@ class Profile extends React.Component{
 
     render() { 
         return (
-            <section id="wrapper">
+            <section id="wrapper" className={this.state.view}>
                 <div className="container">
                     <UserProfile profile={this.state.profile} user={this.state.user}/>
                     <Education user_id={this.state.user.id}/>

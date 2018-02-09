@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   get "/auth/stackexchange/callback", to: "sessions#stackexchange"
   get 'auth/failure', to: redirect('/')
 
-  resources :users, only: ['index', 'show', 'new']
+  resources :users, only: ['index', 'new']
+  get "profile/:id/", to: "users#show", as: :profile
   get "users/:id/github", to: "users#github", as: :github
   get "users/:id/stackoverflow", to: "users#stackoverflow", as: :stackoverflow
   get "users/:id/facebook", to: "users#facebook", as: :facebook

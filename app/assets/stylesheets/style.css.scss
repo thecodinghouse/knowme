@@ -846,8 +846,12 @@ ol{
   }
   .public_view .add-btn ,.public_view .delete-btn ,.public_view .remove-skill,.single-skill:hover .remove-skill{
       display: none;
+      
   }
 
+  .public_view .single-skill{
+    cursor: default;
+  }
 
   @media print{
       #navigation{

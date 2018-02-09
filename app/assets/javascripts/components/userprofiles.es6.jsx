@@ -157,7 +157,7 @@ class UserProfile extends React.Component {
 
                         <div className="col-lg-12 "></div>
                         <p className="col-lg-5 d-flex general-type">
-                            <span>Merital Status :</span>
+                            <span>Martial Status :</span>
                             <input type="text" className="general-input hide-input flex-grow" placeholder="Married/Single"
                                 value={this.state.profile.marital_status || ''} onChange={(evt)=>this.handleChangeInput("marital_status", evt)}/>
                         </p>
