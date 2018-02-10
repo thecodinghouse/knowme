@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       patch 'educations_update', to: 'educations#bulk_update'
       patch 'works_update', to: 'works#bulk_update'
       resources :skills, only: ['create', 'index', 'destroy']
+      get "skills/search", to: "skills#search"
       resources :achievements, only: ['create', 'update', 'index', 'destroy']
       patch 'achievements_update', to: 'achievements#bulk_update'
       resources :projects, only: ['create', 'update', 'index', 'destroy']

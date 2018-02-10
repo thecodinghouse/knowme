@@ -3,15 +3,7 @@ class Api::V1::SkillsController < Api::V1::BaseController
   
   def index
     @user = User.find(params[:id])
-    all_skills = []
-    Skill.all.map(&:name).uniq.each do |s|
-      skill = Hash.new
-      skill['text'] = s
-      skill['value'] = s
-      all_skills << skill
-    end
-    
-    render json: {user_skills: @user.skills.uniq, all_skills: all_skills}
+    render json: @user.skills.uniq
   end
   
   def create
@@ -27,6 +19,11 @@ class Api::V1::SkillsController < Api::V1::BaseController
     @s = Skill.find(params[:id])
     current_user.skills.delete(@s)
     render json: {success: true}
+  end
+
+  def search
+    @skills = Skill.where("name LIKE :prefix", prefix: "#{params['q']}%")
+    render json: Skill.to_options(@skills)
   end
 
   private

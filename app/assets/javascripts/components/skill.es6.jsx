@@ -5,9 +5,7 @@ class Skill extends React.Component {
         this.state = {
             isEditMode: props.isEditMode,
             skills: [],
-            all_skills: [],
             user_id: props.user_id,
-            // skill:{}
         };
     };
 
@@ -21,22 +19,37 @@ class Skill extends React.Component {
             url: '/api/v1/skills/?id=' + this.state.user_id,
             success: function (result) {
                 that.setState({
-                    skills: result.user_skills,
-                    all_skills: result.all_skills
+                    skills: result,
                 });
 
-                $('#skill-tags').selectize({
+                let ele = $('#skill-tags');
+                ele.selectize({
                     plugins: ['restore_on_backspace'],
                     delimiter: ',',
                     persist: false,
-                    options: result.all_skills,
+                    load: function(query, callback) {
+                        if (!query.length) return callback();
+                        $.ajax({
+                            method: 'GET',
+                            headers: {
+                                "Authorization": localStorage.getItem('auth_token'),
+                            },
+                            url: '/api/v1/skills/search?q='+query,
+                            error: function() {
+                                callback();
+                            },
+                            success: function(res) {
+                                callback(res);
+                            }
+                        });
+                    },
                     create: function(input) {
                         return {
                             value: input,
                             text: input
                         }
                     }
-                });
+                })
             }
         });
     };
