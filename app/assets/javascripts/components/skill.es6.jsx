@@ -21,35 +21,34 @@ class Skill extends React.Component {
                 that.setState({
                     skills: result,
                 });
-
-                let ele = $('#skill-tags');
-                ele.selectize({
-                    plugins: ['restore_on_backspace'],
-                    delimiter: ',',
-                    persist: false,
-                    load: function(query, callback) {
-                        if (!query.length) return callback();
-                        $.ajax({
-                            method: 'GET',
-                            headers: {
-                                "Authorization": localStorage.getItem('auth_token'),
-                            },
-                            url: '/api/v1/skills/search?q='+query,
-                            error: function() {
-                                callback();
-                            },
-                            success: function(res) {
-                                callback(res);
-                            }
-                        });
+            }
+        });
+        
+        $('#skill-tags').selectize({
+            plugins: ['restore_on_backspace'],
+            delimiter: ',',
+            persist: false,
+            load: function(query, callback) {
+                if (!query.length) return callback();
+                $.ajax({
+                    method: 'GET',
+                    headers: {
+                        "Authorization": localStorage.getItem('auth_token'),
                     },
-                    create: function(input) {
-                        return {
-                            value: input,
-                            text: input
-                        }
+                    url: '/api/v1/skills/search?q='+query,
+                    error: function() {
+                        callback();
+                    },
+                    success: function(res) {
+                        callback(res);
                     }
-                })
+                });
+            },
+            create: function(input) {
+                return {
+                    value: input,
+                    text: input
+                }
             }
         });
     };
