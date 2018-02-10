@@ -3,6 +3,7 @@ class Education extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditMode: props.isEditMode,
             educations: [],
             user_id: props.user_id,
             education: {}
@@ -27,10 +28,12 @@ class Education extends React.Component {
     };
 
     handleChangeInput(i, key, e) {
-        let educational_details = this.state.educations;
-        educational_details[i][key] = e.target.value;
-        this.setState({educations: educational_details});
-        this.handleSave(educational_details);
+        if(this.state.isEditMode){
+            let educational_details = this.state.educations;
+            educational_details[i][key] = e.target.value;
+            this.setState({educations: educational_details});
+            this.handleSave(educational_details);
+        }
     }
 
     handleSave(data) {
@@ -42,65 +45,72 @@ class Education extends React.Component {
         }, 3000);
     }
 
-    doneTyping(data){  
-        $.ajax({
-            method: 'PATCH',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {educations: data},
-            url: '/api/v1/educations_update',
-            success: function (result) {
-                console.log(result);
-            }
-        });
+    doneTyping(data){ 
+        if(this.state.isEditMode){ 
+            $.ajax({
+                method: 'PATCH',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {educations: data},
+                url: '/api/v1/educations_update',
+                success: function (result) {
+                    console.log(result);
+                }
+            });
+        }
     }
 
     handleCreateFormInput(key, e) {
-        let educational_detail = this.state.education;
-        educational_detail[key] = e.target.value;
-        this.setState({education: educational_detail});
+        if(this.state.isEditMode){
+            let educational_detail = this.state.education;
+            educational_detail[key] = e.target.value;
+            this.setState({education: educational_detail});
+        }
     }
 
     handleAddEducation(){ 
-        var that = this  
-        $.ajax({
-            method: 'POST',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {education: that.state.education},
-            url: '/api/v1/educations',
-            success: function (result) {
-                console.log(result);
-                let educational_details =  that.state.educations
-                educational_details.push(result)
-                that.setState({
-                    educations: educational_details,
-                })
-                $('#educationModal').modal('hide');
-            }
-        });
+        if(this.state.isEditMode){
+            var that = this  
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {education: that.state.education},
+                url: '/api/v1/educations',
+                success: function (result) {
+                    console.log(result);
+                    let educational_details =  that.state.educations
+                    educational_details.push(result)
+                    that.setState({
+                        educations: educational_details,
+                    })
+                    $('#educationModal').modal('hide');
+                }
+            });
+        }
     }
     handleDeleteEducation(i, evt) {
-        var that = this;
-        console.log('delete');
-        $.ajax({
-            method: 'DELETE',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            url: '/api/v1/educations/' + this.state.educations[i].id,
-            success: function (result) {
-                console.log(result);
-                let educational_details =  that.state.educations;
-                educational_details.splice(i, 1);
-                that.setState({
-                    educations: educational_details,
-                });
-            }
-        });
-
+        if(this.state.isEditMode){
+            var that = this;
+            console.log('delete');
+            $.ajax({
+                method: 'DELETE',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                url: '/api/v1/educations/' + this.state.educations[i].id,
+                success: function (result) {
+                    console.log(result);
+                    let educational_details =  that.state.educations;
+                    educational_details.splice(i, 1);
+                    that.setState({
+                        educations: educational_details,
+                    });
+                }
+            });
+        }
     }
 
 

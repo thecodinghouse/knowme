@@ -3,6 +3,7 @@ class Project extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditMode: props.isEditMode,
             projects: [],
             user_id: props.user_id,
             project:{}
@@ -27,10 +28,12 @@ class Project extends React.Component {
     };
 
     handleChangeInput(i, key, e) {
-        let projects = this.state.projects;
-        projects[i][key] = e.target.value;
-        this.setState({projects: projects});
-        this.handleSave(projects);
+        if(this.state.isEditMode){
+            let projects = this.state.projects;
+            projects[i][key] = e.target.value;
+            this.setState({projects: projects});
+            this.handleSave(projects);
+        }
     }
 
     handleSave(data) {
@@ -43,65 +46,71 @@ class Project extends React.Component {
     }
 
     doneTyping(data){
-        console.log(data)
-        $.ajax({
-            method: 'PATCH',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {projects: data},
-            url: '/api/v1/projects_update',
-            success: function (result) {
-                console.log(result);
-            }
-        });
+        if(this.state.isEditMode){
+            $.ajax({
+                method: 'PATCH',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {projects: data},
+                url: '/api/v1/projects_update',
+                success: function (result) {
+                    console.log(result);
+                }
+            });
+        }
     }
 
     handleCreateFormInput(key, e) {
-        let project = this.state.project;
-        project[key] = e.target.value;
-        this.setState({project: project});
+        if(this.state.isEditMode){
+            let project = this.state.project;
+            project[key] = e.target.value;
+            this.setState({project: project});
+        }
     }
 
     handleAddProject(){ 
-        var that = this  
-        $.ajax({
-            method: 'POST',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {project: that.state.project},
-            url: '/api/v1/projects',
-            success: function (result) {
-                console.log(result);
-                let projects =  that.state.projects
-                projects.push(result)
-                that.setState({
-                    projects: projects,
-                })
-                $('#projectModal').modal('hide');
-            }
-        });
+        if(this.state.isEditMode){
+            var that = this  
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {project: that.state.project},
+                url: '/api/v1/projects',
+                success: function (result) {
+                    console.log(result);
+                    let projects =  that.state.projects
+                    projects.push(result)
+                    that.setState({
+                        projects: projects,
+                    })
+                    $('#projectModal').modal('hide');
+                }
+            });
+        }
     }
     handleDeleteProject(i, evt) {
-        var that = this;
-        console.log('delete');
-        $.ajax({
-            method: 'DELETE',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            url: '/api/v1/projects/' + this.state.projects[i].id,
-            success: function (result) {
-                console.log(result);
-                let projects =  that.state.projects;
-                projects.splice(i, 1);
-                that.setState({
-                    projects: projects,
-                });
-            }
-        });
-
+        if(this.state.isEditMode){
+            var that = this;
+            console.log('delete');
+            $.ajax({
+                method: 'DELETE',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                url: '/api/v1/projects/' + this.state.projects[i].id,
+                success: function (result) {
+                    console.log(result);
+                    let projects =  that.state.projects;
+                    projects.splice(i, 1);
+                    that.setState({
+                        projects: projects,
+                    });
+                }
+            });
+        }
     }
 
 

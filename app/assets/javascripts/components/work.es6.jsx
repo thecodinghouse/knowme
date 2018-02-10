@@ -3,6 +3,7 @@ class Work extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditMode: props.isEditMode,
             works: [],
             user_id: props.user_id,
             work:{}

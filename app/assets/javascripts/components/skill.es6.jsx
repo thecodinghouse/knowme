@@ -3,6 +3,7 @@ class Skill extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditMode: props.isEditMode,
             skills: [],
             all_skills: [],
             user_id: props.user_id,
@@ -40,50 +41,48 @@ class Skill extends React.Component {
         });
     };
 
-    // handleCreateFormInput(key, e) {
-    //     let skill = this.state.skill;
-    //     skill[key] = e.target.value;
-    //     this.setState({skill: skill});
-    // }
-
     handleAddSkill(){ 
-        let that = this  
-        let skill_value = $('#skill-tags').val();
+        if(this.state.isEditMode){
+            let that = this  
+            let skill_value = $('#skill-tags').val();
 
-        console.log(skill_value);
-        $.ajax({
-            method: 'POST',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {skill: {name: skill_value}},
-            url: '/api/v1/skills',
-            success: function (result) {
-                that.setState({
-                    skills: result,
-                })
-                $('#skillModal').modal('hide');
-            }
-        });
+            console.log(skill_value);
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {skill: {name: skill_value}},
+                url: '/api/v1/skills',
+                success: function (result) {
+                    that.setState({
+                        skills: result,
+                    })
+                    $('#skillModal').modal('hide');
+                }
+            });
+        }
     }
 
     handleRemoveSkill(i){ 
-        var that = this  
-        $.ajax({
-            method: 'DELETE',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            url: '/api/v1/skills/'+ that.state.skills[i].id,
-            success: function (result) {
-                let skills =  that.state.skills
-                skills.splice(i, 1);
-                that.setState({
-                    skills: skills,
-                })
-                // $('#skillModal').modal('hide');
-            }
-        });
+        if(this.state.isEditMode){
+            var that = this  
+            $.ajax({
+                method: 'DELETE',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                url: '/api/v1/skills/'+ that.state.skills[i].id,
+                success: function (result) {
+                    let skills =  that.state.skills
+                    skills.splice(i, 1);
+                    that.setState({
+                        skills: skills,
+                    })
+                    // $('#skillModal').modal('hide');
+                }
+            });
+        }
     }
 
     render() {

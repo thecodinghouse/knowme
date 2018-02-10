@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  skip_before_action :authenticate_request, only: ['index', 'serve', 'github_info', 'stackoverflow_info']
+  skip_before_action :authenticate_request, only: ['index', 'serve', 'github', 'stackoverflow']
 
   def create
     @photo = Photo.new

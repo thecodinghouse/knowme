@@ -3,6 +3,7 @@ class Achievement extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditMode: props.isEditMode,
             achievements: [],
             user_id: props.user_id,
             achievement:{}
@@ -27,10 +28,12 @@ class Achievement extends React.Component {
     };
 
     handleChangeInput(i, key, e) {
-        let achievements = this.state.achievements;
-        achievements[i][key] = e.target.value;
-        this.setState({achievements: achievements});
-        this.handleSave(achievements);
+        if(this.state.isEditMode){
+            let achievements = this.state.achievements;
+            achievements[i][key] = e.target.value;
+            this.setState({achievements: achievements});
+            this.handleSave(achievements);
+        }
     }
 
     handleSave(data) {
@@ -43,65 +46,71 @@ class Achievement extends React.Component {
     }
 
     doneTyping(data) {
-        console.log(data)
-        $.ajax({
-            method: 'PATCH',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {achievements: data},
-            url: '/api/v1/achievements_update',
-            success: function (result) {
-                console.log(result);
-            }
-        });
+        if(this.state.isEditMode){
+            $.ajax({
+                method: 'PATCH',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {achievements: data},
+                url: '/api/v1/achievements_update',
+                success: function (result) {
+                    console.log(result);
+                }
+            });
+        }
     }
 
     handleCreateFormInput(key, e) {
-        let achievement = this.state.achievement;
-        achievement[key] = e.target.value;
-        this.setState({educational_detail: achievement});
+        if(this.state.isEditMode){
+            let achievement = this.state.achievement;
+            achievement[key] = e.target.value;
+            this.setState({educational_detail: achievement});
+        }
     }
 
     handleAddAchievement(){ 
-        var that = this  
-        $.ajax({
-            method: 'POST',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {achievement: that.state.achievement},
-            url: '/api/v1/achievements',
-            success: function (result) {
-                console.log(result);
-                let achievements =  that.state.achievements
-                achievements.push(result)
-                that.setState({
-                    achievements: achievements,
-                })
-                $('#achievementModal').modal('hide');
-            }
-        });
+        if(this.state.isEditMode){
+            var that = this  
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {achievement: that.state.achievement},
+                url: '/api/v1/achievements',
+                success: function (result) {
+                    console.log(result);
+                    let achievements =  that.state.achievements
+                    achievements.push(result)
+                    that.setState({
+                        achievements: achievements,
+                    })
+                    $('#achievementModal').modal('hide');
+                }
+            });
+        }
     }
     handleDeleteAchievement(i, evt) {
-        var that = this;
-        console.log('delete');
-        $.ajax({
-            method: 'DELETE',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            url: '/api/v1/achievements/' + this.state.achievements[i].id,
-            success: function (result) {
-                console.log(result);
-                let achievements =  that.state.achievements;
-                achievements.splice(i, 1);
-                that.setState({
-                    achievements: achievements,
-                });
-            }
-        });
-
+        if(this.state.isEditMode){
+            var that = this;
+            console.log('delete');
+            $.ajax({
+                method: 'DELETE',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                url: '/api/v1/achievements/' + this.state.achievements[i].id,
+                success: function (result) {
+                    console.log(result);
+                    let achievements =  that.state.achievements;
+                    achievements.splice(i, 1);
+                    that.setState({
+                        achievements: achievements,
+                    });
+                }
+            });
+        }    
     }
 
 

@@ -3,8 +3,9 @@ class UserProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            profile: props.profile,
-            user: props.user,
+            isEditMode: props.isEditMode,
+            user_id: props.user_id,
+            user:[],
             errors:{},
             defaultPic: props.defaultPic
         };
@@ -12,19 +13,37 @@ class UserProfile extends React.Component {
     };
 
     componentDidMount(){
-
-        $(document).on('click','.profile-pic',function(e){
-            $('#image-upload').click();
-            return false;
+        var that = this;
+        $.ajax({
+            method: 'GET',
+            headers: {
+                "Authorization": localStorage.getItem('auth_token'),
+            },
+            url: '/api/v1/users?id=' + this.state.user_id,
+            success: function (result) {
+                if(!(Object.keys(result).length === 0)){
+                    that.setState({
+                        user: [result],
+                    });
+                }
+            }
         });
+        if(this.state.isEditMode){
+            $(document).on('click','.profile-pic',function(e){
+                $('#image-upload').click();
+                return false;
+            });
+        }
     }
 
 
     handleChangeInput(key, e) {
-        let profile = this.state.profile;
-        profile[key] = e.target.value;
-        this.setState({profile: profile});
-        this.handleSave(profile);
+        if(this.state.isEditMode){
+            let user = this.state.user;
+            user[0].profile[key] = e.target.value;
+            this.setState({user: user});
+            this.handleSave(user[0].profile);
+        }
     }
 
     handleSave(data) {
@@ -37,66 +56,76 @@ class UserProfile extends React.Component {
     }
 
     startUploading (){
-        let formData = new FormData($('#upload_form')[0]);
-        $.ajax({
-            method: 'POST',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data:formData,
-            url: '/api/v1/users',
-            dataType: 'json',
-            processData: false,
-            contentType: false,
-            success: function (result) {
-                console.log(result);
-                $("#profile_picture").attr('src',result.image_path);
-            },
-            error: function(res) {
-                this.setState({errors: res.responseJSON.errors})
-            }
-        })
+        if(this.state.isEditMode){
+            let formData = new FormData($('#upload_form')[0]);
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data:formData,
+                url: '/api/v1/users',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    console.log(result);
+                    $("#profile_picture").attr('src',result.image_path);
+                },
+                error: function(res) {
+                    this.setState({errors: res.responseJSON.errors})
+                }
+            })
+        }
     }
 
     doneTyping(data){
-        var that = this;
-        $.ajax({
-            method: 'PATCH',
-            headers: {
-                "Authorization": localStorage.getItem('auth_token'),
-            },
-            data: {profile: data},
-            url: '/api/v1/users/' + this.state.profile.id,
-            success: function (result) {
-                //console.log(result);
-            },
-            error: function(res) {
-                that.setState({errors: res.responseJSON.errors})
-            }
-        });
+        if(this.state.isEditMode){
+            var that = this;
+            $.ajax({
+                method: 'PATCH',
+                headers: {
+                    "Authorization": localStorage.getItem('auth_token'),
+                },
+                data: {profile: data},
+                url: '/api/v1/users/' + that.state.user[0].profile.id,
+                success: function (result) {
+                    //console.log(result);
+                },
+                error: function(res) {
+                    that.setState({errors: res.responseJSON.errors})
+                }
+            });
+        }
     }
 
-    render() {        
+    render() {
+        let disabled = "disabled"
+        if(this.state.isEditMode){
+            disabled = ""
+        }      
         return (
             <div className="row">
+                {this.state.user.map((item,i) => (
+                <div key={i}>
                 <div className="col-lg-12">
                     <div className="row position-relative">
                         <div className="col-lg-8">
                             <div className="row " >
                                 <div className="profile-pic col-lg-4 col-md-4 col-4">
                                     
-                                    <img id="profile_picture" src={this.state.profile.image_url || this.state.defaultPic}/>
+                                    <img id="profile_picture" src={item.profile.image_url || this.state.defaultPic}/>
                 
                                     
                                 </div>
                                 
                                 <form id="upload_form" hidden encType="multipart/form-data" method="post">
-                                            <input type="file"  name="image" id="image-upload" onChange={()=> this.startUploading()} accept="image/*"/>
+                                            <input type="file"  disabled={disabled} name="image" id="image-upload" onChange={()=> this.startUploading()} accept="image/*"/>
                                         </form>
 
                                 <div className="basic-details col-lg-8 col-md-8 col-6">
-                                    <input type="text" className="person-name hide-input" placeholder="Full Name" value={this.state.profile.name || ''} onChange={(evt)=>this.handleChangeInput("name", evt)}/>
-                                    <input type="text" className="person-designation hide-input" placeholder="Set title that describes you" value={this.state.profile.title || ''} onChange={(evt)=>this.handleChangeInput("title", evt)}/>
+                                    <input type="text" className="person-name hide-input" placeholder="Full Name" value={item.profile.name || ''} onChange={(evt)=>this.handleChangeInput("name", evt)}/>
+                                    <input type="text" className="person-designation hide-input" placeholder="Set title that describes you" value={item.profile.title || ''} onChange={(evt)=>this.handleChangeInput("title", evt)}/>
                                 </div>
                             </div>
                         </div>
@@ -104,15 +133,15 @@ class UserProfile extends React.Component {
                             <ul className="contact-details">
                                 <li className="d-flex">
                                     <span className="fa fa-envelope"></span>
-                                    <input type="text" disabled className="person-email hide-input" placeholder="Email address" defaultValue={this.state.user.email}/>
+                                    <input type="text" disabled className="person-email hide-input" placeholder="Email address" defaultValue={item.email}/>
                                 </li>
                                 <li className="d-flex">
                                     <span className="fa fa-phone"></span>
-                                    <input type="text" className="person-mobile hide-input" placeholder="+91 XXXXXXXXXX" value={this.state.profile.contact_no || ''} onChange={(evt)=>this.handleChangeInput("contact_no", evt)}/>
+                                    <input type="text" className="person-mobile hide-input" placeholder="+91 XXXXXXXXXX" value={item.profile.contact_no || ''} onChange={(evt)=>this.handleChangeInput("contact_no", evt)}/>
                                 </li>
                                 <li className="d-flex">
                                     <span className="fa fa-map-marker"></span>
-                                    <textarea type="text" className="person-address hide-input" placeholder="Your current location" spellCheck="false" value={this.state.profile.current_location || ''} onChange={(evt)=>this.handleChangeInput("current_location", evt)}></textarea>
+                                    <textarea type="text" className="person-address hide-input" placeholder="Your current location" spellCheck="false" value={item.profile.current_location || ''} onChange={(evt)=>this.handleChangeInput("current_location", evt)}></textarea>
 
                                 </li>
 
@@ -128,17 +157,17 @@ class UserProfile extends React.Component {
 
                         FOR FUN: C+ Jokes, Segway Roller Derby, NYT Sat. Crosswords (in Sharpie!), Ostrich Grooming.
 
-                        If you see scary things, look for the helpers-you'll always see people helping. -Fred Rogers" spellCheck="false" value={this.state.profile.about_me || ''} onChange={(evt)=>this.handleChangeInput("about_me", evt)} > </textarea>
+                        If you see scary things, look for the helpers-you'll always see people helping. -Fred Rogers" spellCheck="false" value={item.profile.about_me || ''} onChange={(evt)=>this.handleChangeInput("about_me", evt)} > </textarea>
                     <div className="row">
                         <p className="col-lg-4 d-flex general-type">
                             <span>Birthday :</span>
-                            <input type="date" className="general-input hide-input flex-grow" placeholder="DD/MM/YYYY" value={this.state.profile.birthday || ''} onChange={(evt)=>this.handleChangeInput("birthday", evt)}/>
+                            <input type="date" className="general-input hide-input flex-grow" placeholder="DD/MM/YYYY" value={item.profile.birthday || ''} onChange={(evt)=>this.handleChangeInput("birthday", evt)}/>
                         </p>
 
                         <p className="col-lg-8 d-flex general-type">
                             <span>Languages : </span>
                             <input type="text" className="general-input hide-input flex-grow" placeholder="English, Hindi, Marathi, ..."
-                                value={this.state.profile.languages || ''} onChange={(evt)=>this.handleChangeInput("languages", evt)}/>
+                                value={item.profile.languages || ''} onChange={(evt)=>this.handleChangeInput("languages", evt)}/>
                         </p>
 
                         
@@ -147,25 +176,27 @@ class UserProfile extends React.Component {
                         <p className="col-lg-4 d-flex general-type">
                             <span>Hometown : </span>
                             <input type="text" className="general-input hide-input flex-grow" placeholder="Pune, Maharastra, 411028"
-                                value={this.state.profile.hometown || ''} onChange={(evt)=>this.handleChangeInput("hometown", evt)}/>
+                                value={item.profile.hometown || ''} onChange={(evt)=>this.handleChangeInput("hometown", evt)}/>
                         </p>
 
                         <p className="col-lg-8 d-flex general-type">
                             <span>Hobbies : </span>
                             <input type="text" className="general-input hide-input flex-grow" placeholder="Reading, Cricket, ..."
-                                value={this.state.profile.hobbies || ''} onChange={(evt)=>this.handleChangeInput("hobbies", evt)}/>
+                                value={item.profile.hobbies || ''} onChange={(evt)=>this.handleChangeInput("hobbies", evt)}/>
                         </p>
 
                         <div className="col-lg-12 "></div>
                         <p className="col-lg-5 d-flex general-type">
                             <span>Martial Status :</span>
                             <input type="text" className="general-input hide-input flex-grow" placeholder="Married/Single"
-                                value={this.state.profile.marital_status || ''} onChange={(evt)=>this.handleChangeInput("marital_status", evt)}/>
+                                value={item.profile.marital_status || ''} onChange={(evt)=>this.handleChangeInput("marital_status", evt)}/>
                         </p>
 
                         
                     </div>
                 </div>
+                </div>
+                ))}
             </div>       
         )
     }

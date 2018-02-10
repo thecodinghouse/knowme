@@ -4,9 +4,8 @@ class Profile extends React.Component{
         super(props, context);
     
         this.state = {
-            user: props.user,
-            profile: props.profile,
-            view: props.view,
+            user_id: props.user_id,
+            isEditMode: props.isEditMode,
             defaultPic: props.defaultPic
         };
     };
@@ -25,17 +24,21 @@ class Profile extends React.Component{
     }
 
     render() { 
+        let view = "public_view"
+        if(this.state.isEditMode){
+            view = ""
+        }
         return (
-            <section id="wrapper" className={this.state.view}>
+            <section id="wrapper" className={view}>
                 <div className="container">
-                    <UserProfile profile={this.state.profile} user={this.state.user} defaultPic={this.state.defaultPic}/>
-                    <Education user_id={this.state.user.id}/>
-                    <Work user_id={this.state.user.id}/>
-                    <Skill user_id={this.state.user.id}/>
-                    <Achievement user_id={this.state.user.id}/>
-                    <Project user_id={this.state.user.id}/>
-                    <GithubRepo user_id={this.state.user.id}/>
-                    <StackExchangeRepo user_id={this.state.user.id}/>
+                    <UserProfile user_id={this.state.user_id} defaultPic={this.state.defaultPic} isEditMode={this.state.isEditMode}/>
+                    <Education user_id={this.state.user_id} isEditMode={this.state.isEditMode}/>
+                    <Work user_id={this.state.user_id} isEditMode={this.state.isEditMode}/>
+                    <Skill user_id={this.state.user_id} isEditMode={this.state.isEditMode}/>
+                    <Achievement user_id={this.state.user_id} isEditMode={this.state.isEditMode}/>
+                    <Project user_id={this.state.user_id} isEditMode={this.state.isEditMode}/>
+                    <GithubRepo user_id={this.state.user_id}/>
+                    <StackExchangeRepo user_id={this.state.user_id}/>
                 </div>
             </section>
         )

@@ -11,12 +11,12 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by_uuid(params[:id])
-        className = "public_view"
+        isEditMode = false
         if current_user && current_user == @user
-            className = ""
+            isEditMode = true
         end
         default_user_path = ActionController::Base.helpers.asset_url("defaultpic.jpg")
-        render component: 'Profile', props:{user: @user, profile: @user.profile, view: className, defaultPic: default_user_path}
+        render component: 'Profile', props:{user_id: @user.id, isEditMode: isEditMode, defaultPic: default_user_path}
     end
 
     def new
