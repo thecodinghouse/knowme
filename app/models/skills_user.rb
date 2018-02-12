@@ -1,3 +1,3 @@
 class SkillsUser < ApplicationRecord
-    validates :skill_id, uniqueness: { scope: [:user_id, ]}
+    validates_uniqueness_of :skill_id,  scope: [:user_id]
 end
