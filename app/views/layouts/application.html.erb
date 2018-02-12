@@ -28,7 +28,7 @@
   </head>
 
   <body>
-    <nav id="navigation">
+    <nav id="navigation" class="<% if request.path.include?('/profile/') %>d-none d-sm-block<% end %>">
         <div class="container">
             <div class="row">
                 <div class="col">

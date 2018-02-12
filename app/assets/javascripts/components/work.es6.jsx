@@ -181,7 +181,7 @@ class Work extends React.Component {
                                         onChange={(evt) => this.handleCreateFormInput("location", evt)}/>
                                     </div>
                                     <div className="col form-group">
-                                    <div className="form-check mt-4">
+                                    <div className="form-check mt-4 ml-4">
                                         <input className="form-check-input"
                                             type="checkbox"
                                             onChange={(evt) => this.handleCreateFormInput("currently_working", evt)}
