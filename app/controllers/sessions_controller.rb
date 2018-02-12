@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
     account = User.from_omniauth(auth, current_user)
     if account.user.valid? 
       image_path = auth.info.image+ '?type=large'
-      account.user.profile.update(image_url: image_path)
-      redirect_to account.user.page
+      current_user.profile.update(image_url: image_path)
+      redirect_to current_user.page
     end
   end
 
@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
     auth = env["omniauth.auth"]
     account = User.from_omniauth(auth, current_user)
     if account.user.valid? 
-      redirect_to account.user.page
+      redirect_to current_user.page
     end
   end
 

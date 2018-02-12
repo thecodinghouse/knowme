@@ -15,7 +15,7 @@ class User < ApplicationRecord
     delegate :url_helpers, to: 'Rails.application.routes'
 
     def self.from_omniauth(auth, user)
-        account = SocialAccount.where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |account|
+        account = SocialAccount.where(provider: auth.provider, uid: auth.uid, user:user).first_or_initialize.tap do |account|
             account.email = auth.info.email
             account.uid = auth.uid
             account.provider = auth.provider
@@ -73,7 +73,7 @@ class User < ApplicationRecord
         end
         if auth.provider == 'stackexchange'
             response = RubyStackoverflow.users_tags([auth.uid],{min: 1, max: 10, sort: 'popular' })
-            response.data.first.tags.each do |tag|
+            response.data.first && response.data.first.tags.each do |tag|
                 @skill = Skill.find_or_create_by(name: tag.name)
                 user.skills << @skill
             end

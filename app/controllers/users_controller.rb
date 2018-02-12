@@ -28,15 +28,28 @@ class UsersController < ApplicationController
     end
 
     def facebook
-        render component: 'Facebook', props:{page: stackoverflow_path(params[:id])}
+        if current_user.social_accounts.map(&:provider).include?('facebook')
+            redirect_to stackoverflow_path(current_user.uuid)
+        else
+            render component: 'Facebook', props:{page: stackoverflow_path(current_user.uuid)}
+        end
+       
     end
 
     def github
-        render component: 'Github', props:{page: facebook_path(params[:id])}
+        if current_user.social_accounts.map(&:provider).include?('github')
+            redirect_to facebook_path(params[:id])
+        else
+            render component: 'Github', props:{page: facebook_path(current_user.uuid)}
+        end
     end
 
     def stackoverflow
-        render component: 'StackExchange', props:{page: profile_path(params[:id])}
+        if current_user.social_accounts.map(&:provider).include?('stackexchange')
+            redirect_to profile_path(current_user.uuid)
+        else
+            render component: 'StackExchange', props:{page: profile_path(current_user.uuid)}
+        end
     end
 
 end
