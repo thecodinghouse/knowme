@@ -5,6 +5,7 @@ class Profile extends React.Component{
     
         this.state = {
             user_id: props.user_id,
+            providers: props.providers,
             isEditMode: props.isEditMode,
             defaultPic: props.defaultPic
         };
@@ -18,12 +19,14 @@ class Profile extends React.Component{
             
         });
 
+
         $(document).on('change keyup','textarea',function(){
             $('textarea').css('height',this.scrollHeight);
         });
+
     }
 
-    render() { 
+    render() {
         let view = "public_view"
         if(this.state.isEditMode){
             view = ""
@@ -39,6 +42,7 @@ class Profile extends React.Component{
                     <Project user_id={this.state.user_id} isEditMode={this.state.isEditMode}/>
                     <GithubRepo user_id={this.state.user_id}/>
                     <StackExchangeRepo user_id={this.state.user_id}/>
+                    <Footer user_id={this.state.user_id} providers ={this.state.providers}/>
                 </div>
             </section>
         )

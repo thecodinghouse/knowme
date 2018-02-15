@@ -28,7 +28,7 @@ class Education extends React.Component {
     };
 
     handleChangeInput(i, key, e) {
-        if(this.state.isEditMode){
+        if (this.state.isEditMode) {
             let educational_details = this.state.educations;
             educational_details[i][key] = e.target.value;
             this.setState({educations: educational_details});
@@ -45,8 +45,8 @@ class Education extends React.Component {
         }, 3000);
     }
 
-    doneTyping(data){ 
-        if(this.state.isEditMode){ 
+    doneTyping(data) {
+        if (this.state.isEditMode) {
             $.ajax({
                 method: 'PATCH',
                 headers: {
@@ -62,16 +62,16 @@ class Education extends React.Component {
     }
 
     handleCreateFormInput(key, e) {
-        if(this.state.isEditMode){
+        if (this.state.isEditMode) {
             let educational_detail = this.state.education;
             educational_detail[key] = e.target.value;
             this.setState({education: educational_detail});
         }
     }
 
-    handleAddEducation(){ 
-        if(this.state.isEditMode){
-            var that = this  
+    handleAddEducation() {
+        if (this.state.isEditMode) {
+            var that = this
             $.ajax({
                 method: 'POST',
                 headers: {
@@ -81,7 +81,7 @@ class Education extends React.Component {
                 url: '/api/v1/educations',
                 success: function (result) {
                     console.log(result);
-                    let educational_details =  that.state.educations
+                    let educational_details = that.state.educations
                     educational_details.push(result)
                     that.setState({
                         educations: educational_details,
@@ -91,8 +91,9 @@ class Education extends React.Component {
             });
         }
     }
+
     handleDeleteEducation(i, evt) {
-        if(this.state.isEditMode){
+        if (this.state.isEditMode) {
             var that = this;
             console.log('delete');
             $.ajax({
@@ -103,7 +104,7 @@ class Education extends React.Component {
                 url: '/api/v1/educations/' + this.state.educations[i].id,
                 success: function (result) {
                     console.log(result);
-                    let educational_details =  that.state.educations;
+                    let educational_details = that.state.educations;
                     educational_details.splice(i, 1);
                     that.setState({
                         educations: educational_details,
@@ -117,30 +118,41 @@ class Education extends React.Component {
     render() {
         return (
             <div className="row">
-            <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
-                        <a href="#" data-toggle="modal" data-target="#educationModal" className="position-absolute add-btn">
-                            <span className="fa fa-plus"></span>
-                        </a>
-    
-    
-                        <h4 className="heading-h4">Educational Details</h4>
-                        {this.state.educations.map((item,i) => (
+                <div className="col-lg-12 border-top-1 work-exp position-relative margin-tb20">
+                    <a href="#" data-toggle="modal" data-target="#educationModal" className="position-absolute add-btn">
+                        <span className="fa fa-plus"></span>
+                    </a>
+
+
+                    <h4 className="heading-h4">Educational Details</h4>
+                    {this.state.educations.map((item, i) => (
                         <div className="single-exp position-relative" key={i}>
-                            <a href="javascript:void(0)" onClick={(evt)=>this.handleDeleteEducation(i,evt)} className="position-absolute delete-btn">
+                            <a href="javascript:void(0)" onClick={(evt) => this.handleDeleteEducation(i, evt)}
+                               className="position-absolute delete-btn">
                                 <span className="fa fa-trash"></span>
                             </a>
-                            <input type="text" className="company-name hide-input col-lg-12" placeholder="Institution Name" value={item.institution || ''} onChange={(evt)=>this.handleChangeInput(i, "institution", evt)}/>
-                            <input type="text" className="company-designation hide-input col-lg-12" placeholder="Field of study ex.(Computer Science Engineering)" value={item.field_of_study || ''} onChange={(evt)=>this.handleChangeInput(i, "field_of_study", evt)}/>
-                            
-                            <input type="text" className="general-input hide-input col-lg-12" placeholder="Degree ex.(Bachalor of Engineering)" value={item.degree || ''} onChange={(evt)=>this.handleChangeInput(i, "degree", evt)}/>
-                            
+                            <input type="text" className="company-name hide-input col-lg-12"
+                                   placeholder="Institution Name" value={item.institution || ''}
+                                   onChange={(evt) => this.handleChangeInput(i, "institution", evt)}/>
+                            <input type="text" className="company-designation hide-input col-lg-12"
+                                   placeholder="Field of study ex.(Computer Science Engineering)"
+                                   value={item.field_of_study || ''}
+                                   onChange={(evt) => this.handleChangeInput(i, "field_of_study", evt)}/>
+
+                            <input type="text" className="general-input hide-input col-lg-12"
+                                   placeholder="Degree ex.(Bachalor of Engineering)" value={item.degree || ''}
+                                   onChange={(evt) => this.handleChangeInput(i, "degree", evt)}/>
+
                             <div className="col-lg-12">
-                                    <input type="date" className="year-input hide-input " value={item.year_of_start || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_start", evt)}/> <span className="to_space">To</span> 
-                                    <input type="date" className="year-input hide-input " value={item.year_of_end || ''} onChange={(evt)=>this.handleChangeInput(i, "year_of_end", evt)}/>
+                                <input type="date" className="year-input hide-input " value={item.year_of_start || ''}
+                                       onChange={(evt) => this.handleChangeInput(i, "year_of_start", evt)}/> <span
+                                className="to_space">To</span>
+                                <input type="date" className="year-input hide-input " value={item.year_of_end || ''}
+                                       onChange={(evt) => this.handleChangeInput(i, "year_of_end", evt)}/>
                             </div>
-                            
+
                         </div>
-                        ))}
+                    ))}
                 </div>
 
                 <div className="modal fade" id="educationModal" role="dialog" aria-hidden="true">
@@ -149,28 +161,28 @@ class Education extends React.Component {
                             <div className="modal-header">
                                 <h5 className="modal-title">New Education</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div className="modal-body">
                                 <div className="mt-2">
-                                <div className="form-row">
-                                            <div className="col form-group">
-                                                <label>Institution</label>
-                                                <input
-                                                    className="form-control"
-                                                    type="text"
-                                                    onChange={(evt)=>this.handleCreateFormInput( "institution", evt)}/>
+                                    <div className="form-row">
+                                        <div className="col form-group">
+                                            <label>Institution</label>
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                onChange={(evt) => this.handleCreateFormInput("institution", evt)}/>
 
-                                            </div>
                                         </div>
+                                    </div>
                                     <div className="form-row">
                                         <div className="col form-group">
                                             <label>Degree</label>
                                             <input
                                                 className="form-control"
                                                 type="text"
-                                                onChange={(evt)=>this.handleCreateFormInput("degree", evt)}/>
+                                                onChange={(evt) => this.handleCreateFormInput("degree", evt)}/>
 
                                         </div>
                                         <div className="col form-group">
@@ -178,7 +190,7 @@ class Education extends React.Component {
                                             <input
                                                 className="form-control"
                                                 type="text"
-                                            onChange={(evt)=>this.handleCreateFormInput( "field_of_study", evt)}/>
+                                                onChange={(evt) => this.handleCreateFormInput("field_of_study", evt)}/>
                                         </div>
                                     </div>
                                     <div className="form-row">
@@ -187,14 +199,14 @@ class Education extends React.Component {
                                             <input
                                                 className="form-control"
                                                 type="date"
-                                            onChange={(evt)=>this.handleCreateFormInput("year_of_start", evt)}/>
+                                                onChange={(evt) => this.handleCreateFormInput("year_of_start", evt)}/>
                                         </div>
                                         <div className="col form-group">
                                             <label>Year Of end</label>
                                             <input
-                                            className="form-control"
-                                            type="date"
-                                            onChange={(evt)=>this.handleCreateFormInput("year_of_end", evt)}/>
+                                                className="form-control"
+                                                type="date"
+                                                onChange={(evt) => this.handleCreateFormInput("year_of_end", evt)}/>
                                         </div>
                                     </div>
 
@@ -202,7 +214,9 @@ class Education extends React.Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary" onClick={(evt)=>this.handleAddEducation()}>Add Education</button>
+                                <button type="button" className="btn btn-primary"
+                                        onClick={(evt) => this.handleAddEducation()}>Add Education
+                                </button>
                             </div>
                         </div>
                     </div>

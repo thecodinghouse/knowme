@@ -38,8 +38,30 @@
                     <ul class="float-right">
                         <% if request.path.include?('/profile/') %>
                           <li >
-                              <a href="javascript:void(0);" onclick="return exportToPdf();"> Export <span class="far fa-file-pdf"></span></a>
+                              <a href="javascript:void(0);" data-toggle="modal" data-target="#shareURLModal"> Share URl</a>
                           </li>
+                          <li >
+                          <a href="javascript:void(0);" onclick="return exportToPdf();"> Export <span class="far fa-file-pdf"></span></a>
+                          </li>
+                        <div class="modal fade" id="shareURLModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Sharing URL</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <span class="url_copied"></span>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="return copyUrl();">URL Copied!</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <% end %>
                         <% if current_user.blank? %>
                           <li >
@@ -49,7 +71,7 @@
                             <a href="<%=users_path%>">Log in</a>
                           </li>
                         <% else %>
-                        <li >
+                          <li >
                             <%= link_to 'Profile', profile_path(id: current_user.uuid)  %>
                           </li>
 
@@ -77,5 +99,29 @@
           window.print();
       }
     <% end %>
+    <%= javascript_tag do %>
+
+    var toCopy  = window.location.href;
+    $('.url_copied').html(toCopy);
+
+
+    function copyUrl(){
+
+
+    var urlField = document.querySelector('.url_copied');
+    //here we have used selection API to make a selection and
+    //The Range interface represents a fragment of a document that can contain nodes and parts of text nodes.
+    // create a Range object
+    var range = document.createRange();
+    // set the Node to select the "range"
+    range.selectNode(urlField);
+    // add the Range to the set of window selections
+    window.getSelection().addRange(range);
+
+    // execute 'copy', can't 'cut' in this case
+    document.execCommand('copy');
+    // console.log(urlField)
+    }
+  <% end %>
   </body>
 </html>

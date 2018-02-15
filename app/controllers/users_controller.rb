@@ -11,12 +11,14 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by_uuid(params[:id])
+        @providers = current_user.social_accounts.map(&:provider)
         isEditMode = false
         if current_user && current_user == @user
             isEditMode = true
         end
         default_user_path = ActionController::Base.helpers.asset_url("defaultpic.jpg")
-        render component: 'Profile', props:{user_id: @user.id, isEditMode: isEditMode, defaultPic: default_user_path}
+        render component: 'Profile', props:{user_id: @user.id, isEditMode: isEditMode, defaultPic: default_user_path,
+                                            providers: @providers}
     end
 
     def new
