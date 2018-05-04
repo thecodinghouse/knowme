@@ -1,24 +1,22 @@
-# README
+# Know Me
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Easily create your developer profile which can be shared right from know.me's platform, just connect your social profiles then customize the information and share it.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+### Connect to your social profiles
 
-* System dependencies
+With know.me account you can connect your other social accounts like stackoverflow, github, facebook etc. and the information from accounts will get extracted and saved in your know.me profile
 
-* Configuration
+### Easy customization
 
-* Database creation
+Know.me provides very easy platform to gather all information from your social profiles and later easily customized, you can edit the information inline without any hesitation.
 
-* Database initialization
+### Share with world
 
-* How to run the test suite
+Once you are done with profile customization and filling all the information 
 
-* Services (job queues, cache servers, search engines, etc.)
+you can export your profile in pdf format like resume and you can take printout of it, or you can copy your profile link and share it with potential clients.
 
-* Deployment instructions
 
-* ...
+
