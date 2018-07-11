@@ -2,16 +2,21 @@
 
 Easily create your developer profile which can be shared right from know.me's platform, just connect your social profiles then customize the information and share it.
 
+<img src="https://drive.google.com/uc?id=1TmWMIbyXant3bczAiaJsWkfUWbqbx85U" />
+
 ## Features
 
 ### Connect to your social profiles
 
 With know.me account you can connect your other social accounts like stackoverflow, github, facebook etc. and the information from accounts will get extracted and saved in your know.me profile
 
+<img src="https://drive.google.com/uc?id=1uoz2a6CUhXVx62pOcq1RBoAxkH-MY0ny"/>
 
 ### Easy customization
 
 Know.me provides very easy platform to gather all information from your social profiles and later easily customized, you can edit the information inline without any hesitation.
+
+<img src="https://drive.google.com/uc?id=139Npif4xZ4NhsEy-l9yzpyTADgAATGy3" />
 
 ### Share with world
 
